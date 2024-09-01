@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"string": "cc"
+		},
+		"makefile.launchConfigurations": [
+			{
+				"cwd": "/home/scott/Develop/gtk/fidolio/bin",
+				"binaryPath": "/home/scott/Develop/gtk/fidolio/bin/fidolio",
+				"binaryArgs": []
+			}
+		]
+	}
+}
+
