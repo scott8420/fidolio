@@ -10,6 +10,7 @@
 #include <plotline.xpm>
 #include <summary.xpm>
 #include <world.xpm>
+#include <compile.xpm>
 
 MainWindow::MainWindow() {
     this->set_ui();
@@ -37,6 +38,7 @@ void MainWindow::set_ui() {
     auto worl_lbl = Gtk::make_managed<Gtk::Label>("Contents of Worlds");
     auto outl_lbl = Gtk::make_managed<Gtk::Label>("Contents of Outline");
     auto edit_lbl = Gtk::make_managed<Gtk::Label>("Contents of Editor");
+    auto comp_lbl = Gtk::make_managed<Gtk::Label>("Contents of Compile");
 
     // Load a specific icon
     auto home_img = Gtk::make_managed<Gtk::Image>(Gdk::Texture::create_for_pixbuf(Gdk::Pixbuf::create_from_xpm_data(home)));
@@ -46,6 +48,7 @@ void MainWindow::set_ui() {
     auto worl_img = Gtk::make_managed<Gtk::Image>(Gdk::Texture::create_for_pixbuf(Gdk::Pixbuf::create_from_xpm_data(world)));
     auto outl_img = Gtk::make_managed<Gtk::Image>(Gdk::Texture::create_for_pixbuf(Gdk::Pixbuf::create_from_xpm_data(outline)));
     auto edit_img = Gtk::make_managed<Gtk::Image>(Gdk::Texture::create_for_pixbuf(Gdk::Pixbuf::create_from_xpm_data(editor)));
+    auto comp_img = Gtk::make_managed<Gtk::Image>(Gdk::Texture::create_for_pixbuf(Gdk::Pixbuf::create_from_xpm_data(compile)));
     
     auto home_hbx = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
     auto summ_hbx = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
@@ -54,6 +57,7 @@ void MainWindow::set_ui() {
     auto worl_hbx = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
     auto outl_hbx = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
     auto edit_hbx = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
+    auto comp_hbx = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
     
     home_hbx->append(*home_img);
     home_img->set_hexpand(true);
@@ -82,6 +86,10 @@ void MainWindow::set_ui() {
     edit_hbx->append(*edit_img);
     edit_img->set_hexpand(true);
     edit_hbx->set_hexpand(true);
+
+    comp_hbx->append(*comp_img);
+    comp_img->set_hexpand(true);
+    comp_hbx->set_hexpand(true);
      
     m_nb.append_page(*home_lbl, *home_hbx);
     m_nb.append_page(*summ_lbl, *summ_hbx);
@@ -90,6 +98,7 @@ void MainWindow::set_ui() {
     m_nb.append_page(*worl_lbl, *worl_hbx);
     m_nb.append_page(*outl_lbl, *outl_hbx);
     m_nb.append_page(*edit_lbl, *edit_hbx);
+    m_nb.append_page(*comp_lbl, *comp_hbx);
     
     m_nb.set_expand(true);
 
