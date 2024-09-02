@@ -3,7 +3,7 @@
 # PROPERTIES
 PROG=fidolio
 CXX=g++
-CXXFLAGS=`pkg-config --cflags gtkmm-4.0` -Iinclude/ -std=c++17 -g
+CXXFLAGS=`pkg-config --cflags gtkmm-4.0` -Iinclude/ -Iinclude/rsc/ -Iinclude/rsc/toolbar -std=c++17 -g
 LIBS=`pkg-config --libs gtkmm-4.0`
 SRCS=$(wildcard src/*.cc)
 OBJS=$(SRCS:.cc=.o)

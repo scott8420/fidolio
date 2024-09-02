@@ -1,13 +1,23 @@
 #include <mainwindow.hh>
 #include <utils.hh>
+#include <gdkmm.h>
+
+// Toolbar images in xpm format
+#include <editor.xpm>
+#include <home.xpm>
+#include <outline.xpm>
+#include <people.xpm>
+#include <plotline.xpm>
+#include <summary.xpm>
+#include <world.xpm>
 
 MainWindow::MainWindow() {
-    this->setUI();
+    this->set_ui();
 }
 
-void MainWindow::setUI() {
+void MainWindow::set_ui() {
     // This just sets the title of our new window.
-    this->set_title("Msg Box");
+    this->set_title("Fidolio");
 
     this->set_default_size(400, 200);
 
@@ -19,47 +29,70 @@ void MainWindow::setUI() {
     this->set_child(this->m_box1);
 
     this->m_nb.set_tab_pos(Gtk::PositionType::LEFT);
-    m_one.set_text("Contents of Tab One");
-    m_two.set_text("Contents of Tab Two");
-    m_three.set_text("Contents of Tab Three");
 
-    //gtk_notebook_append_page(notebook, tab1, gtk_vbox_new());
+    auto home_lbl = Gtk::make_managed<Gtk::Label>("Contents of Home");
+    auto summ_lbl = Gtk::make_managed<Gtk::Label>("Contents of Summary");
+    auto peop_lbl = Gtk::make_managed<Gtk::Label>("Contents of People");
+    auto plot_lbl = Gtk::make_managed<Gtk::Label>("Contents of Plotline");
+    auto worl_lbl = Gtk::make_managed<Gtk::Label>("Contents of Worlds");
+    auto outl_lbl = Gtk::make_managed<Gtk::Label>("Contents of Outline");
+    auto edit_lbl = Gtk::make_managed<Gtk::Label>("Contents of Editor");
 
     // Load a specific icon
-   
-    // auto m_i1 = Gtk::make_managed<Gtk::Image>("../rsc/go-home-symbolic.svg");
-    // auto m_i2 = Gtk::make_managed<Gtk::Image>("../rsc/open-menu-symbolic.svg");
-    // Gtk::Button m_b1;
-    // Gtk::Button::gtk_button_set_image(m_b1, m_i1)
-
-    // m_nb.append_page()
-    m_nb.append_page(m_one, "One");
-    m_nb.append_page(m_two, "Two");
-    m_nb.append_page(m_three, "Three");
+    auto home_img = Gtk::make_managed<Gtk::Image>(Gdk::Texture::create_for_pixbuf(Gdk::Pixbuf::create_from_xpm_data(home)));
+    auto summ_img = Gtk::make_managed<Gtk::Image>(Gdk::Texture::create_for_pixbuf(Gdk::Pixbuf::create_from_xpm_data(summary)));
+    auto peop_img = Gtk::make_managed<Gtk::Image>(Gdk::Texture::create_for_pixbuf(Gdk::Pixbuf::create_from_xpm_data(people)));
+    auto plot_img = Gtk::make_managed<Gtk::Image>(Gdk::Texture::create_for_pixbuf(Gdk::Pixbuf::create_from_xpm_data(plotline)));
+    auto worl_img = Gtk::make_managed<Gtk::Image>(Gdk::Texture::create_for_pixbuf(Gdk::Pixbuf::create_from_xpm_data(world)));
+    auto outl_img = Gtk::make_managed<Gtk::Image>(Gdk::Texture::create_for_pixbuf(Gdk::Pixbuf::create_from_xpm_data(outline)));
+    auto edit_img = Gtk::make_managed<Gtk::Image>(Gdk::Texture::create_for_pixbuf(Gdk::Pixbuf::create_from_xpm_data(editor)));
+    
+    auto home_hbx = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
+    auto summ_hbx = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
+    auto peop_hbx = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
+    auto plot_hbx = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
+    auto worl_hbx = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
+    auto outl_hbx = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
+    auto edit_hbx = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
+    
+    home_hbx->append(*home_img);
+    home_img->set_hexpand(true);
+    home_hbx->set_hexpand(true);
+     
+    summ_hbx->append(*summ_img);
+    summ_img->set_hexpand(true);
+    summ_hbx->set_hexpand(true);
+     
+    peop_hbx->append(*peop_img);
+    peop_img->set_hexpand(true);
+    peop_hbx->set_hexpand(true);
+     
+    plot_hbx->append(*plot_img);
+    plot_img->set_hexpand(true);
+    plot_hbx->set_hexpand(true);
+     
+    worl_hbx->append(*worl_img);
+    worl_img->set_hexpand(true);
+    worl_hbx->set_hexpand(true);
+     
+    outl_hbx->append(*outl_img);
+    outl_img->set_hexpand(true);
+    outl_hbx->set_hexpand(true);
+     
+    edit_hbx->append(*edit_img);
+    edit_img->set_hexpand(true);
+    edit_hbx->set_hexpand(true);
+     
+    m_nb.append_page(*home_lbl, *home_hbx);
+    m_nb.append_page(*summ_lbl, *summ_hbx);
+    m_nb.append_page(*peop_lbl, *peop_hbx);
+    m_nb.append_page(*plot_lbl, *plot_hbx);
+    m_nb.append_page(*worl_lbl, *worl_hbx);
+    m_nb.append_page(*outl_lbl, *outl_hbx);
+    m_nb.append_page(*edit_lbl, *edit_hbx);
+    
     m_nb.set_expand(true);
 
     this->m_box1.append(m_nb);
     this->m_box1.set_expand(true);
-
-    Utils::msg_box(this, "A Message", "Details");
-
-    // Add the button
-    // this->m_btn1.set_label("Click Me");
-    // this->m_btn1.set_size_request(90,24);
-    // this->m_btn1.set_margin(20);
-    // this->m_btn1.signal_clicked().connect(sigc::bind(
-    //             sigc::mem_fun(*this, &MainWindow::on_btn1_clicked), "Button 1"));
-    // this->m_box1.append(m_btn1);
-    // this->m_btn1.set_expand(false);
 }
-
-void MainWindow::on_btn1_clicked(const Glib::ustring& data) {
-    auto dlg = Gtk::AlertDialog::create();
-    dlg->set_message(data + " was clicked");
-    dlg->set_detail("That was easy");
-    dlg->set_buttons({});
-    dlg->set_default_button(-1);
-    dlg->set_cancel_button(-1);
-    dlg->show(*this);
-}
-
