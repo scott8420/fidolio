@@ -11,7 +11,8 @@ enum {
     WORLD,
     OUTLINE,
     EDITOR,
-    COMPILE
+    COMPILE,
+    TRASH
 };
 
 class MainWindow : public Gtk::Window {
@@ -26,6 +27,7 @@ protected:
     Gtk::HeaderBar m_hbr;
     Gtk::MenuButton m_fidolio_mbtn;
     Gtk::AboutDialog m_about_dlg;
+    Gtk::Paned m_project_pnd;
 
     Glib::RefPtr<Gio::Menu> m_fidolio_menu;
     Glib::RefPtr<Gio::SimpleActionGroup> m_action_group_fidolio;
@@ -42,6 +44,7 @@ protected:
     void on_action_outline();
     void on_action_editor();
     void on_action_compile();
+    void on_action_trash();
     void on_action_quit();
     void on_action_about();
 

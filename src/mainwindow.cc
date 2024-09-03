@@ -15,11 +15,14 @@
 #include <compile.xpm>
 #include <fidolio.xpm>
 #include <fidolio_tall.xpm>
+#include <trash.xpm>
 
 // Resources
 #include <fidolio_menu.ui>
 
-MainWindow::MainWindow() {
+MainWindow::MainWindow() :
+    m_project_pnd(Gtk::Orientation::HORIZONTAL) {
+
     WINDOW = this;
 
     // This just sets the title of our new window.
@@ -63,6 +66,16 @@ void MainWindow::set_ui() {
     auto outl_lbl = Gtk::make_managed<Gtk::Label>("Contents of Outline");
     auto edit_lbl = Gtk::make_managed<Gtk::Label>("Contents of Editor");
     auto comp_lbl = Gtk::make_managed<Gtk::Label>("Contents of Compile");
+    auto tras_lbl = Gtk::make_managed<Gtk::Label>("Contents of Trash");
+
+    auto pro1_lbl = Gtk::make_managed<Gtk::Label>("Contents of Project A");
+    auto pro2_lbl = Gtk::make_managed<Gtk::Label>("Contents of Project B");
+
+    this->m_project_pnd.set_expand(true);
+    this->m_project_pnd.set_margin(0);
+    this->m_project_pnd.set_wide_handle(true);
+    this->m_project_pnd.set_start_child(*pro1_lbl);
+    this->m_project_pnd.set_end_child(*pro2_lbl);
 
     // Load a specific icon
     auto proj_img = Gtk::make_managed<Gtk::Image>(Gdk::Texture::create_for_pixbuf(Gdk::Pixbuf::create_from_xpm_data(project)));
@@ -73,6 +86,7 @@ void MainWindow::set_ui() {
     auto outl_img = Gtk::make_managed<Gtk::Image>(Gdk::Texture::create_for_pixbuf(Gdk::Pixbuf::create_from_xpm_data(outline)));
     auto edit_img = Gtk::make_managed<Gtk::Image>(Gdk::Texture::create_for_pixbuf(Gdk::Pixbuf::create_from_xpm_data(editor)));
     auto comp_img = Gtk::make_managed<Gtk::Image>(Gdk::Texture::create_for_pixbuf(Gdk::Pixbuf::create_from_xpm_data(compile)));
+    auto tras_img = Gtk::make_managed<Gtk::Image>(Gdk::Texture::create_for_pixbuf(Gdk::Pixbuf::create_from_xpm_data(trash)));
     
     auto proj_hbx = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
     auto summ_hbx = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
@@ -82,7 +96,8 @@ void MainWindow::set_ui() {
     auto outl_hbx = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
     auto edit_hbx = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
     auto comp_hbx = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
-    
+    auto tras_hbx = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
+
     proj_hbx->append(*proj_img);
     proj_img->set_hexpand(true);
     proj_hbx->set_hexpand(true);
@@ -115,7 +130,11 @@ void MainWindow::set_ui() {
     comp_img->set_hexpand(true);
     comp_hbx->set_hexpand(true);
      
-    this->m_nb.append_page(*proj_lbl, *proj_hbx);
+    tras_hbx->append(*tras_img);
+    tras_img->set_hexpand(true);
+    tras_hbx->set_hexpand(true);
+    
+    this->m_nb.append_page(m_project_pnd, *proj_hbx);
     this->m_nb.append_page(*summ_lbl, *summ_hbx);
     this->m_nb.append_page(*peop_lbl, *peop_hbx);
     this->m_nb.append_page(*plot_lbl, *time_hbx);
@@ -123,6 +142,7 @@ void MainWindow::set_ui() {
     this->m_nb.append_page(*outl_lbl, *outl_hbx);
     this->m_nb.append_page(*edit_lbl, *edit_hbx);
     this->m_nb.append_page(*comp_lbl, *comp_hbx);
+    this->m_nb.append_page(*tras_lbl, *tras_hbx);
 
     this->m_nb.set_expand(true);
 
@@ -194,6 +214,7 @@ void MainWindow::set_action_group_navigate() {
     this->m_action_group_navigate->add_action("outline", sigc::mem_fun(*this, &MainWindow::on_action_outline));
     this->m_action_group_navigate->add_action("editor", sigc::mem_fun(*this, &MainWindow::on_action_editor));
     this->m_action_group_navigate->add_action("compile", sigc::mem_fun(*this, &MainWindow::on_action_compile));
+    this->m_action_group_navigate->add_action("trash", sigc::mem_fun(*this, &MainWindow::on_action_trash));
     
     // Add to Window's Actions
 	this->insert_action_group("navigate_actions", this->m_action_group_navigate);
@@ -208,6 +229,7 @@ void MainWindow::set_action_group_navigate() {
         APP->set_accel_for_action("navigate_actions.outline", "<Primary>6");
         APP->set_accel_for_action("navigate_actions.editor", "<Primary>7");
         APP->set_accel_for_action("navigate_actions.compile", "<Primary>8");
+        APP->set_accel_for_action("navigate_actions.trash", "<Primary>9");
 	}
 }
 
@@ -250,4 +272,8 @@ void MainWindow::on_action_editor() {
 
 void MainWindow::on_action_compile() {
     this->m_nb.set_current_page(COMPILE);
+}
+
+void MainWindow::on_action_trash() {
+    this->m_nb.set_current_page(TRASH);
 }
