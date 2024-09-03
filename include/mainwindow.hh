@@ -3,12 +3,22 @@
 
 #include <gtkmm.h>
 
+enum {
+    PROJECT = 0,
+    SUMMARY,
+    PEOPLE,
+    TIMELINE,
+    WORLD,
+    OUTLINE,
+    EDITOR,
+    COMPILE
+};
+
 class MainWindow : public Gtk::Window {
 public:
     MainWindow();
 
 protected:
-    // Signals
 
     // Widgets
     Gtk::Box m_bx;
@@ -34,7 +44,6 @@ protected:
     void on_action_compile();
     void on_action_quit();
     void on_action_about();
-
 
     void set_ui();
     void set_headerbar();

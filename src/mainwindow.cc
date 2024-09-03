@@ -19,17 +19,6 @@
 // Resources
 #include <fidolio_menu.ui>
 
-enum {
-    PROJECT = 0,
-    SUMMARY,
-    PEOPLE,
-    TIMELINE,
-    WORLD,
-    OUTLINE,
-    EDITOR,
-    COMPILE
-};
-
 MainWindow::MainWindow() {
     WINDOW = this;
 
@@ -179,6 +168,7 @@ void MainWindow::set_action_group_file() {
 
     // Connect Signals
     this->m_action_group_file->add_action("quit", sigc::mem_fun(*this, &MainWindow::on_action_quit));
+    this->m_action_group_file->add_action("about", sigc::mem_fun(*this, &MainWindow::on_action_about));
 
     // Add to Window's Actions
     this->insert_action_group("file_actions", this->m_action_group_file);
@@ -186,6 +176,7 @@ void MainWindow::set_action_group_file() {
     // Set Acceleration Keys
     if( APP != nullptr) {
         APP->set_accel_for_action("file_actions.quit", "<Primary>q");
+        APP->set_accel_for_action("file_actions.about", "<Primary>0");
     }
 }
 
