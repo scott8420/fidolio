@@ -1,1 +1,1 @@
-This file is a placeholder so the obj folder will not be empty and included in the github repository
+This is a placeholder file so github will not strip the containing folder.

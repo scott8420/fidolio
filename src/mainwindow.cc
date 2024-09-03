@@ -4,6 +4,21 @@
 
 #include <gdkmm.h>
 
+// Toolbar images in xpm format
+#include <editor.xpm>
+#include <project.xpm>
+#include <outline.xpm>
+#include <people.xpm>
+#include <timeline.xpm>
+#include <summary.xpm>
+#include <world.xpm>
+#include <compile.xpm>
+#include <fidolio.xpm>
+#include <fidolio_tall.xpm>
+
+// Resources
+#include <fidolio_menu.ui>
+
 enum {
     PROJECT = 0,
     SUMMARY,
@@ -15,36 +30,39 @@ enum {
     COMPILE
 };
 
-// Toolbar images in xpm format
-#include <editor.xpm>
-#include <project.xpm>
-#include <outline.xpm>
-#include <people.xpm>
-#include <timeline.xpm>
-#include <summary.xpm>
-#include <world.xpm>
-#include <compile.xpm>
-
 MainWindow::MainWindow() {
     WINDOW = this;
 
     // This just sets the title of our new window.
     this->set_title(Globals::get()->app_name());
-
     this->set_default_size(800, 500);
+    
+    this->set_headerbar();
     this->set_ui();
     this->set_action_groups();
 }
 
 void MainWindow::set_ui() {
     
-
     // Sets the margin around the box.
-    this->m_box1.set_margin(0);
-    this->m_box1.set_homogeneous(false);
+    this->m_bx.set_margin(0);
+    this->m_bx.set_homogeneous(false);
+
+    // About Dialog Setup
+    this->m_about_dlg.set_transient_for(*this);
+    this->m_about_dlg.set_hide_on_close();
+    this->m_about_dlg.set_logo(Gdk::Texture::create_for_pixbuf(Gdk::Pixbuf::create_from_xpm_data(fidolio_tall))); 
+    this->m_about_dlg.set_program_name(Globals::get()->app_name() + " Writing Application");
+    this->m_about_dlg.set_version(Globals::get()->app_version());
+    this->m_about_dlg.set_copyright("Scott Combs");
+    this->m_about_dlg.set_comments("An OpenSource Writing Application");
+    this->m_about_dlg.set_license("LGPL");
+    this->m_about_dlg.set_website("http://www.github.com/scott8420");
+    this->m_about_dlg.set_website_label("github website");
+    this->m_about_dlg.set_authors(Glib::OptionGroup::vecustrings{"Scott Combs"});
 
     // put the box into the main window.
-    this->set_child(this->m_box1);
+    this->set_child(this->m_bx);
 
     this->m_nb.set_tab_pos(Gtk::PositionType::LEFT);
 
@@ -108,33 +126,61 @@ void MainWindow::set_ui() {
     comp_img->set_hexpand(true);
     comp_hbx->set_hexpand(true);
      
-    m_nb.append_page(*proj_lbl, *proj_hbx);
-    m_nb.append_page(*summ_lbl, *summ_hbx);
-    m_nb.append_page(*peop_lbl, *peop_hbx);
-    m_nb.append_page(*plot_lbl, *time_hbx);
-    m_nb.append_page(*worl_lbl, *worl_hbx);
-    m_nb.append_page(*outl_lbl, *outl_hbx);
-    m_nb.append_page(*edit_lbl, *edit_hbx);
-    m_nb.append_page(*comp_lbl, *comp_hbx);
-    
-    m_nb.set_expand(true);
+    this->m_nb.append_page(*proj_lbl, *proj_hbx);
+    this->m_nb.append_page(*summ_lbl, *summ_hbx);
+    this->m_nb.append_page(*peop_lbl, *peop_hbx);
+    this->m_nb.append_page(*plot_lbl, *time_hbx);
+    this->m_nb.append_page(*worl_lbl, *worl_hbx);
+    this->m_nb.append_page(*outl_lbl, *outl_hbx);
+    this->m_nb.append_page(*edit_lbl, *edit_hbx);
+    this->m_nb.append_page(*comp_lbl, *comp_hbx);
 
-    this->m_box1.append(m_nb);
-    this->m_box1.set_expand(true);
+    this->m_nb.set_expand(true);
+
+    this->m_bx.append(m_nb);
+    this->m_bx.set_expand(true);
+}
+
+void MainWindow::set_headerbar() {
+    this->m_fidolio_mbtn.set_label("");
+    auto fidolio_img = Gtk::make_managed<Gtk::Image>(Gdk::Texture::create_for_pixbuf(Gdk::Pixbuf::create_from_xpm_data(fidolio)));
+    this->m_fidolio_mbtn.set_child(*fidolio_img);
+    this->m_fidolio_mbtn.set_has_frame(false);
+    this->m_builder = Gtk::Builder::create_from_string(ui_menu_fidolio);
+    this->m_fidolio_menu = this->m_builder->get_object<Gio::Menu>("fidolio-menu-popup");
+    this->m_fidolio_mbtn.set_menu_model(this->m_fidolio_menu);
+    this->m_hbr.pack_start(this->m_fidolio_mbtn);
+    this->set_titlebar(this->m_hbr);
 }
 
 void MainWindow::set_action_groups() {
     this->set_action_group_file();
     this->set_action_group_navigate();
+    this->set_action_group_fidolio();
+}
 
+void MainWindow::set_action_group_fidolio() {
+
+    //Create the Action Group
+    this->m_action_group_fidolio = Gio::SimpleActionGroup::create();
+
+    //Connect Signals
+    this->m_action_group_fidolio->add_action("quit", sigc::mem_fun(*this, &MainWindow::on_action_quit));
+    this->m_action_group_fidolio->add_action("about", sigc::mem_fun(*this, &MainWindow::on_action_about));
+    
+    //Add to Window's Actions
+    this->insert_action_group("fidolio_actions", this->m_action_group_fidolio);
 }
 
 void MainWindow::set_action_group_file() {
+  
+    // Create the Action Group
     this->m_action_group_file = Gio::SimpleActionGroup::create();
 
     // Connect Signals
     this->m_action_group_file->add_action("quit", sigc::mem_fun(*this, &MainWindow::on_action_quit));
 
+    // Add to Window's Actions
     this->insert_action_group("file_actions", this->m_action_group_file);
 
     // Set Acceleration Keys
@@ -144,6 +190,8 @@ void MainWindow::set_action_group_file() {
 }
 
 void MainWindow::set_action_group_navigate() {
+ 
+    // Create the Action Group
     this->m_action_group_navigate = Gio::SimpleActionGroup::create();
 
 	// Connect Signals
@@ -156,6 +204,7 @@ void MainWindow::set_action_group_navigate() {
     this->m_action_group_navigate->add_action("editor", sigc::mem_fun(*this, &MainWindow::on_action_editor));
     this->m_action_group_navigate->add_action("compile", sigc::mem_fun(*this, &MainWindow::on_action_compile));
     
+    // Add to Window's Actions
 	this->insert_action_group("navigate_actions", this->m_action_group_navigate);
 
 	// Set Acceleration Keys
@@ -175,34 +224,39 @@ void MainWindow::on_action_quit() {
     APP->quit();
 }
 
- void MainWindow::on_action_project() {
+void MainWindow::on_action_about() {
+    this->m_about_dlg.set_visible(true);
+    this->m_about_dlg.present();
+}
+
+void MainWindow::on_action_project() {
     this->m_nb.set_current_page(PROJECT);
- }
+}
 
- void MainWindow::on_action_summary() {
+void MainWindow::on_action_summary() {
     this->m_nb.set_current_page(SUMMARY);
- }
+}
 
- void MainWindow::on_action_people() {
+void MainWindow::on_action_people() {
     this->m_nb.set_current_page(PEOPLE);
- }
+}
 
- void MainWindow::on_action_timeline() {
+void MainWindow::on_action_timeline() {
     this->m_nb.set_current_page(TIMELINE);
- }
+}
 
- void MainWindow::on_action_world() {
+void MainWindow::on_action_world() {
     this->m_nb.set_current_page(WORLD);
- }
+}
 
- void MainWindow::on_action_outline() {
+void MainWindow::on_action_outline() {
     this->m_nb.set_current_page(OUTLINE);
- }
+}
 
- void MainWindow::on_action_editor() {
+void MainWindow::on_action_editor() {
     this->m_nb.set_current_page(EDITOR);
- }
+}
 
- void MainWindow::on_action_compile() {
+void MainWindow::on_action_compile() {
     this->m_nb.set_current_page(COMPILE);
- }
+}
