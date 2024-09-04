@@ -1,6 +1,7 @@
 #include <mainwindow.hh>
 #include <utils.hh>
 #include <globals.hh>
+#include <project_box.hh>
 
 #include <gdkmm.h>
 
@@ -134,7 +135,10 @@ void MainWindow::set_ui() {
     tras_img->set_hexpand(true);
     tras_hbx->set_hexpand(true);
     
-    this->m_nb.append_page(m_project_pnd, *proj_hbx);
+    auto proj_viw = Gtk::make_managed<ProjectBox>(nullptr);
+
+    // Formated example VIEW, LABEL
+    this->m_nb.append_page(*proj_viw, *proj_hbx);
     this->m_nb.append_page(*summ_lbl, *summ_hbx);
     this->m_nb.append_page(*peop_lbl, *peop_hbx);
     this->m_nb.append_page(*plot_lbl, *time_hbx);
