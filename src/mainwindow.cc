@@ -136,7 +136,8 @@ void MainWindow::set_ui() {
     tras_hbx->set_hexpand(true);
     
     auto proj_viw = Gtk::make_managed<ProjectBox>(nullptr);
-
+    proj_viw->set_expand(true);
+    
     // Formated example VIEW, LABEL
     this->m_nb.append_page(*proj_viw, *proj_hbx);
     this->m_nb.append_page(*summ_lbl, *summ_hbx);
