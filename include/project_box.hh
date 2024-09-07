@@ -10,7 +10,9 @@ public:
 
 	void set_data(void*);
 	void* get_data();
-
+	void set_page(int page){
+		this->m_nb.set_current_page(page);
+	}
 protected:
 	void* m_data;
 	Gtk::Notebook m_nb;

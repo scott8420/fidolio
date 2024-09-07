@@ -7,7 +7,7 @@ Comment=Open source tool for writers
 GenericName=fidolio
 Exec=/usr/local/share/fidolio/fidolio
 # Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-Icon=/usr/local/share/fidolio/fidolio.png
+Icon=/usr/local/share/fidolio/fidolio.svg
 StartupNotify=true
 Terminal=false
 Type=Application

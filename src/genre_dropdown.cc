@@ -61,7 +61,7 @@ void GenreDropDown::create_model() {
 	liststore_add_item("Romance", "icon", "Fiction that focuses on the emotional journey and relationship \nbetween characters, often with a happy ending");
 	liststore_add_item("Science Fiction", "icon", "Speculative fiction that explores the consequences of \nscientific or technological advancements, often set in the future");
 	liststore_add_item("Thriller", "icon", "Fiction that aims to evoke tension and suspense, often featuring \nfast-paced plots and high stakes");
-	liststore_add_item("Western", "western", "Fiction that aims to evoke tension and suspense, often featuring \nfast-paced plots and high stakes");
+	liststore_add_item("Western", "western", "Fiction that typically feature stories set in the American frontier \n(Old West or Wild West) between the California Gold Rush of \n1849 and the closing of the frontier in 1890. These novels \noften embody the spirit, struggle, and demise of the new frontier, \nas defined by the American Film Institute");
 	liststore_add_item("Young Adult (YA)", "icon", "Fiction focused on the challenges and experiences of teenagers, \noften exploring themes of identity and coming-of-age");
 }
 
