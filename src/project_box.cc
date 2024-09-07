@@ -4,8 +4,10 @@
 // Resources
 #include <folder.xpm>
 
-ProjectBox::ProjectBox(void* data) : m_data(data) {
+#define MARGINS 50
+#define WIDGET_SPACING 10
 
+ProjectBox::ProjectBox(void* data) : m_data(data) {
 	this->set_ui();
 }
 
@@ -68,15 +70,16 @@ void ProjectBox::set_ui() {
 Gtk::Box* ProjectBox::set_project_ui() {
 	// Configure parent box
 	auto box_1 = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::VERTICAL, 0);
-	auto box_2 = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::VERTICAL, 0);
+	//auto box_2 = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::VERTICAL, 0);
 	auto swn = Gtk::make_managed<Gtk::ScrolledWindow>();
 	swn->set_policy(Gtk::PolicyType::AUTOMATIC, Gtk::PolicyType::AUTOMATIC);
   	swn->set_expand(true);
 
-	box_1->append(*swn);
+	//box_1->append(*swn);
 	box_1->set_homogeneous(false);
 	box_1->set_size_request(650, 250);
-	box_1->set_margin(50);
+	box_1->set_margin(MARGINS);
+	box_1->set_spacing(WIDGET_SPACING);
 	box_1->set_valign(Gtk::Align::START);
 	box_1->set_halign(Gtk::Align::CENTER);
 
@@ -88,6 +91,7 @@ Gtk::Box* ProjectBox::set_project_ui() {
 	auto hbx_5 = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
 	auto hbx_6 = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
 	auto hbx_7 = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
+	auto hbx_8 = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
 
 	auto lbl_1 = Gtk::make_managed<Gtk::Label>();
 	auto lbl_2 = Gtk::make_managed<Gtk::Label>();
@@ -95,6 +99,10 @@ Gtk::Box* ProjectBox::set_project_ui() {
 	auto lbl_4 = Gtk::make_managed<Gtk::Label>();
 	auto lbl_5 = Gtk::make_managed<Gtk::Label>();
 	auto lbl_6 = Gtk::make_managed<Gtk::Label>();
+	auto lbl_7 = Gtk::make_managed<Gtk::Label>();
+	this->m_proj_gdd = Gtk::make_managed<GenreDropDown>();
+	this->m_proj_gdd->set_size_request(500, -1);
+	//this->m_proj_gdd->set_hexpand(true);
 
 	this->m_proj_title_ent = Gtk::make_managed<Gtk::Entry>();
 	this->m_proj_subtitle_ent = Gtk::make_managed<Gtk::Entry>();
@@ -103,8 +111,6 @@ Gtk::Box* ProjectBox::set_project_ui() {
 	this->m_proj_folder_ent = Gtk::make_managed<Gtk::Entry>();
 	this->m_proj_license_ent = Gtk::make_managed<Gtk::Entry>();	
 
-	this->m_proj_genre_cbx = Gtk::make_managed<Gtk::ComboBoxText>();
-	//this->m_proj_genre_cbx->append("")
 	auto btn_1 = Gtk::make_managed<Gtk::Button>();
 	auto img_1 = Gtk::make_managed<Gtk::Image>(Gdk::Texture::create_for_pixbuf(Gdk::Pixbuf::create_from_xpm_data(folder)));
 
@@ -152,6 +158,14 @@ Gtk::Box* ProjectBox::set_project_ui() {
 	hbx_4->append(*lbl_4);
 	hbx_4->append(*this->m_proj_volume_ent);
 
+	// Combobox
+	lbl_7->set_margin_bottom(2);
+	lbl_7->set_xalign(1);
+	lbl_7->set_size_request(100, -1);
+	lbl_7->set_markup("<b>Genre:  </b>");
+	hbx_8->append(*lbl_7);
+	hbx_8->append(*this->m_proj_gdd);
+
 	lbl_5->set_margin_bottom(2);
 	lbl_5->set_xalign(1);
 	lbl_5->set_size_request(100, -1);
@@ -188,15 +202,16 @@ Gtk::Box* ProjectBox::set_project_ui() {
 	hbx_7->append(*this->m_proj_folder_ent);
 	hbx_7->append(*btn_1);
 
-	box_2->append(*hbx_1);
-	box_2->append(*hbx_2);
-	box_2->append(*hbx_3);
-	box_2->append(*hbx_4);
-	box_2->append(*hbx_5);
-	box_2->append(*hbx_6);
-	box_2->append(*hbx_7);
+	box_1->append(*hbx_1);
+	box_1->append(*hbx_2);
+	box_1->append(*hbx_3);
+	box_1->append(*hbx_4);
+	box_1->append(*hbx_8);
+	box_1->append(*hbx_5);
+	box_1->append(*hbx_6);
+	box_1->append(*hbx_7);
 
-	swn->set_child(*box_2);
+	//swn->set_child(*box_2);
 
 	return box_1;
 }
@@ -204,15 +219,16 @@ Gtk::Box* ProjectBox::set_project_ui() {
 Gtk::Box* ProjectBox::set_author_ui() {
 	// Configure parent box
 	auto box_1 = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::VERTICAL, 0);
-	auto box_2 = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::VERTICAL, 0);
+	//auto box_2 = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::VERTICAL, 0);
 	auto swn = Gtk::make_managed<Gtk::ScrolledWindow>();
 	swn->set_policy(Gtk::PolicyType::AUTOMATIC, Gtk::PolicyType::AUTOMATIC);
   	swn->set_expand(true);
 
-	box_1->append(*swn);
+	//box_1->append(*swn);
 	box_1->set_homogeneous(false);
 	box_1->set_size_request(650, 250);
 	box_1->set_margin(50);
+	box_1->set_spacing(WIDGET_SPACING);
 	box_1->set_valign(Gtk::Align::START);
 	box_1->set_halign(Gtk::Align::CENTER);
 
@@ -220,6 +236,7 @@ Gtk::Box* ProjectBox::set_author_ui() {
 	auto hbx_1 = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
 	auto hbx_2 = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
 	auto hbx_3 = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
+	auto hbx_4 = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
 
 	auto lbl_1 = Gtk::make_managed<Gtk::Label>();
 	auto lbl_2 = Gtk::make_managed<Gtk::Label>();
@@ -258,14 +275,14 @@ Gtk::Box* ProjectBox::set_author_ui() {
 	lbl_3->set_markup("<b>Bio:  </b>");
 	this->m_auth_bio_tvw->set_size_request(500, 200);
 	this->m_auth_bio_tvw->set_expand(true);
+	this->m_auth_bio_tvw->set_wrap_mode(Gtk::WrapMode::WORD);
 	hbx_3->append(*lbl_3);
-	hbx_3->append(*this->m_auth_bio_tvw);
+	swn->set_child(*this->m_auth_bio_tvw);
+	hbx_3->append(*swn);
 
-	box_2->append(*hbx_1);
-	box_2->append(*hbx_2);
-	box_2->append(*hbx_3);
-
-	swn->set_child(*box_2);
+	box_1->append(*hbx_1);
+	box_1->append(*hbx_2);
+	box_1->append(*hbx_3);
 
 	return box_1;
 }
@@ -278,15 +295,15 @@ void ProjectBox::on_folder_clicked() {
 }
 
 void ProjectBox::on_folder_clicked_finish(const Glib::RefPtr<Gio::AsyncResult>& result, 
-										 const Glib::RefPtr<Gtk::FileDialog>& dialog) {
-  // Handle the response:
-  try {
-    auto folder = dialog->select_folder_finish(result);
-    this->m_proj_folder_ent->set_text(folder->get_path());
-  } catch (const Gtk::DialogError& err) {
-    // Can be thrown by dialog->select_folder_finish(result).
-    //std::cout << "No folder selected. " << err.what() << std::endl;
-  } catch (const Glib::Error& err) {
-    //std::cout << "Unexpected exception. " << err.what() << std::endl;
-  }
+										  const Glib::RefPtr<Gtk::FileDialog>& dialog) {
+	// Handle the response:
+	try {
+		auto folder = dialog->select_folder_finish(result);
+		this->m_proj_folder_ent->set_text(folder->get_path());
+	} catch (const Gtk::DialogError& err) {
+		// Can be thrown by dialog->select_folder_finish(result).
+		//std::cout << "No folder selected. " << err.what() << std::endl;
+	} catch (const Glib::Error& err) {
+		//std::cout << "Unexpected exception. " << err.what() << std::endl;
+	}
 }
