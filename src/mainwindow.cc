@@ -18,10 +18,12 @@
 #include <fidolio_tall.xpm>
 #include <trash.xpm>
 #include <explore.xpm>
+#include <open-menu.xpm>
 
 // Resources
 #include <fidolio_menu.ui>
 #include <explore_menu.ui>
+#include <open-menu_menu.ui>
 
 MainWindow::MainWindow() :
     m_project_pnd(Gtk::Orientation::HORIZONTAL) {
@@ -83,7 +85,7 @@ void MainWindow::set_ui() {
     // Load a specific icon
     auto proj_img = Gtk::make_managed<Gtk::Image>(Gdk::Texture::create_for_pixbuf(Gdk::Pixbuf::create_from_xpm_data(home)));
     auto summ_img = Gtk::make_managed<Gtk::Image>(Gdk::Texture::create_for_pixbuf(Gdk::Pixbuf::create_from_xpm_data(summary)));
-    auto peop_img = Gtk::make_managed<Gtk::Image>(Gdk::Texture::create_for_pixbuf(Gdk::Pixbuf::create_from_xpm_data(character)));
+    auto char_img = Gtk::make_managed<Gtk::Image>(Gdk::Texture::create_for_pixbuf(Gdk::Pixbuf::create_from_xpm_data(character)));
     auto time_img = Gtk::make_managed<Gtk::Image>(Gdk::Texture::create_for_pixbuf(Gdk::Pixbuf::create_from_xpm_data(timeline)));
     auto worl_img = Gtk::make_managed<Gtk::Image>(Gdk::Texture::create_for_pixbuf(Gdk::Pixbuf::create_from_xpm_data(world)));
     auto outl_img = Gtk::make_managed<Gtk::Image>(Gdk::Texture::create_for_pixbuf(Gdk::Pixbuf::create_from_xpm_data(outline)));
@@ -93,9 +95,9 @@ void MainWindow::set_ui() {
     
     auto proj_hbx = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
     auto summ_hbx = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
-    auto peop_hbx = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
-    auto time_hbx = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
+    auto char_hbx = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
     auto worl_hbx = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
+    auto time_hbx = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
     auto outl_hbx = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
     auto edit_hbx = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
     auto comp_hbx = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
@@ -109,17 +111,17 @@ void MainWindow::set_ui() {
     summ_img->set_hexpand(true);
     summ_hbx->set_hexpand(true);
      
-    peop_hbx->append(*peop_img);
-    peop_img->set_hexpand(true);
-    peop_hbx->set_hexpand(true);
+    char_hbx->append(*char_img);
+    char_img->set_hexpand(true);
+    char_hbx->set_hexpand(true);
+
+    worl_hbx->append(*worl_img);
+    worl_img->set_hexpand(true);
+    worl_hbx->set_hexpand(true);
      
     time_hbx->append(*time_img);
     time_img->set_hexpand(true);
     time_hbx->set_hexpand(true);
-     
-    worl_hbx->append(*worl_img);
-    worl_img->set_hexpand(true);
-    worl_hbx->set_hexpand(true);
      
     outl_hbx->append(*outl_img);
     outl_img->set_hexpand(true);
@@ -143,9 +145,9 @@ void MainWindow::set_ui() {
     // Formated example VIEW, LABEL
     this->m_nb.append_page(*this->m_pb, *proj_hbx);
     this->m_nb.append_page(*summ_lbl, *summ_hbx);
-    this->m_nb.append_page(*peop_lbl, *peop_hbx);
-    this->m_nb.append_page(*plot_lbl, *time_hbx);
+    this->m_nb.append_page(*peop_lbl, *char_hbx);
     this->m_nb.append_page(*worl_lbl, *worl_hbx);
+    this->m_nb.append_page(*plot_lbl, *time_hbx);
     this->m_nb.append_page(*outl_lbl, *outl_hbx);
     this->m_nb.append_page(*edit_lbl, *edit_hbx);
     this->m_nb.append_page(*comp_lbl, *comp_hbx);
@@ -167,14 +169,23 @@ void MainWindow::set_headerbar() {
     this->m_fidolio_mbtn.set_menu_model(this->m_fidolio_menu);
     this->m_hbr.pack_start(this->m_fidolio_mbtn);
 
-    this->m_explore_mbtn.set_label("");
+    this->m_open_menu_mbtn.set_label("Open");
+    auto open_menu_img = Gtk::make_managed<Gtk::Image>(Gdk::Texture::create_for_pixbuf(Utils::image_from_xpm(open_menu)));
+    this->m_open_menu_mbtn.set_child(*open_menu_img);
+    this->m_open_menu_mbtn.set_has_frame(true);
+    this->m_builder->add_from_string(ui_menu_open_menu);
+    this->m_open_menu_menu = this->m_builder->get_object<Gio::Menu>("open-menu-popup");
+    this->m_open_menu_mbtn.set_menu_model(this->m_open_menu_menu);
+    this->m_hbr.pack_end(this->m_open_menu_mbtn);
+
+    this->m_explore_mbtn.set_label("Explorer");
     auto explore_img = Gtk::make_managed<Gtk::Image>(Gdk::Texture::create_for_pixbuf(Utils::image_from_xpm(explore)));
     this->m_explore_mbtn.set_child(*explore_img);
-    this->m_explore_mbtn.set_has_frame(false);
+    this->m_explore_mbtn.set_has_frame(true);
     this->m_builder->add_from_string(ui_menu_explore);
     this->m_explore_menu = this->m_builder->get_object<Gio::Menu>("explore-menu-popup");
     this->m_explore_mbtn.set_menu_model(this->m_explore_menu);
-    this->m_hbr.pack_end(this->m_explore_mbtn);
+    this->m_hbr.pack_end(this->m_explore_mbtn); 
 
     this->set_titlebar(this->m_hbr);
 }
@@ -239,8 +250,8 @@ void MainWindow::set_action_group_explore() {
         APP->set_accel_for_action("explore_actions.home_preferences", "<Alt>6");
         APP->set_accel_for_action("explore_actions.home_summary", "<Ctrl>2");
         APP->set_accel_for_action("explore_actions.home_character", "<Ctrl>3");
-        APP->set_accel_for_action("explore_actions.home_timeline", "<Ctrl>4");
-        APP->set_accel_for_action("explore_actions.home_world", "<Ctrl>5");
+        APP->set_accel_for_action("explore_actions.home_world", "<Ctrl>4");
+        APP->set_accel_for_action("explore_actions.home_timeline", "<Ctrl>5");
         APP->set_accel_for_action("explore_actions.home_outline", "<Ctrl>6");
         APP->set_accel_for_action("explore_actions.home_editor", "<Ctrl>7");
         APP->set_accel_for_action("explore_actions.home_compile", "<Ctrl>8");
@@ -276,8 +287,8 @@ void MainWindow::set_action_group_navigate() {
 	this->m_action_group_navigate->add_action("home", sigc::mem_fun(*this, &MainWindow::on_action_home));
     this->m_action_group_navigate->add_action("summary", sigc::mem_fun(*this, &MainWindow::on_action_summary));
     this->m_action_group_navigate->add_action("character", sigc::mem_fun(*this, &MainWindow::on_action_character));
-    this->m_action_group_navigate->add_action("timeline", sigc::mem_fun(*this, &MainWindow::on_action_timeline));
     this->m_action_group_navigate->add_action("world", sigc::mem_fun(*this, &MainWindow::on_action_world));
+    this->m_action_group_navigate->add_action("timeline", sigc::mem_fun(*this, &MainWindow::on_action_timeline));
     this->m_action_group_navigate->add_action("outline", sigc::mem_fun(*this, &MainWindow::on_action_outline));
     this->m_action_group_navigate->add_action("editor", sigc::mem_fun(*this, &MainWindow::on_action_editor));
     this->m_action_group_navigate->add_action("compile", sigc::mem_fun(*this, &MainWindow::on_action_compile));
@@ -291,8 +302,8 @@ void MainWindow::set_action_group_navigate() {
 		APP->set_accel_for_action("navigate_actions.home", "<Ctrl>1");
 		APP->set_accel_for_action("navigate_actions.summary", "<Ctrl>2");
         APP->set_accel_for_action("navigate_actions.character", "<Ctrl>3");
-        APP->set_accel_for_action("navigate_actions.timeline", "<Ctrl>4");
-        APP->set_accel_for_action("navigate_actions.world", "<Ctrl>5");
+        APP->set_accel_for_action("navigate_actions.world", "<Ctrl>4");
+        APP->set_accel_for_action("navigate_actions.timeline", "<Ctrl>5");
         APP->set_accel_for_action("navigate_actions.outline", "<Ctrl>6");
         APP->set_accel_for_action("navigate_actions.editor", "<Ctrl>7");
         APP->set_accel_for_action("navigate_actions.compile", "<Ctrl>8");
@@ -351,12 +362,12 @@ void MainWindow::on_action_character() {
     this->m_nb.set_current_page(CHARACTER);
 }
 
-void MainWindow::on_action_timeline() {
-    this->m_nb.set_current_page(TIMELINE);
-}
-
 void MainWindow::on_action_world() {
     this->m_nb.set_current_page(WORLD);
+}
+
+void MainWindow::on_action_timeline() {
+    this->m_nb.set_current_page(TIMELINE);
 }
 
 void MainWindow::on_action_outline() {

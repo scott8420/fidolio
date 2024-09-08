@@ -1,0 +1,37 @@
+#ifndef __OPEN_MENU_MENU__
+#define __OPEN_MENU_MENU__
+
+Glib::ustring ui_menu_open_menu =
+  "<interface>"
+  "  <menu id='open-menu-popup'>"
+  "     <submenu>"
+  "        <attribute name='label' translatable='yes'>Utilities</attribute>"
+  "        <section>"
+  "            <item>"
+  "              <attribute name='label' translatable='yes'>A</attribute>"
+  "              <attribute name='action'>open_menu_actions.a</attribute>"
+  "              <attribute name='accel'>&lt;Alt&gt;k</attribute>"
+  "            </item>"
+  "            <item>"
+  "              <attribute name='label' translatable='yes'>B</attribute>"
+  "              <attribute name='action'>open_menu_actions.b</attribute>"
+  "              <attribute name='accel'>&lt;Alt&gt;l</attribute>"
+  "            </item>"
+  "        </section>"
+  "     </submenu>"
+  "     <section>"
+  "        <item>"
+  "            <attribute name='label' translatable='yes'>C</attribute>"
+  "            <attribute name='action'>open_menu_actions.c</attribute>"
+  "            <attribute name='accel'>&lt;Ctrl&gt;u</attribute>"
+  "        </item>"
+  "        <item>"
+  "            <attribute name='label' translatable='yes'>D</attribute>"
+  "            <attribute name='action'>menu_open_actions.d</attribute>"
+  "            <attribute name='accel'>&lt;Ctrl&gt;t</attribute>"
+  "        </item>"
+  "     </section>"
+  "  </menu>"
+  "</interface>";
+  
+  #endif

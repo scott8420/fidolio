@@ -5,6 +5,8 @@
 
 #include <western.xpm>
 #include <question.xpm>
+#include <defaultcover.xpm>
+#include <defaultauthor.xpm>
 
 Glib::ustring Utils::create_uuid() {
 	return Glib::ustring(g_uuid_string_random());
@@ -30,6 +32,10 @@ Glib::RefPtr<Gdk::Pixbuf> Utils::image_from_name(const Glib::ustring& name) {
        return Utils::image_from_xpm(western);
     } else if(name.lowercase() == "question") {
         return Utils::image_from_xpm(question);
+    } else if(name.lowercase() == "defaultcover") {
+        return Utils::image_from_xpm(defaultcover);
+    } else if(name.lowercase() == "defaultauthor") {
+        return Utils::image_from_xpm(defaultauthor);
     }
     
     return Utils::image_from_xpm(question);

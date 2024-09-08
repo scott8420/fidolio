@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="250"
+   height="375"
+   viewBox="0 0 250 375.00002"
+   version="1.1"
+   id="svg176"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   sodipodi:docname="defaultcover.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <defs
+     id="defs170" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.30"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="2.0853333"
+     inkscape:cx="38.602941"
+     inkscape:cy="284.84655"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     inkscape:showpageshadow="2"
+     inkscape:pagecheckerboard="true"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     showguides="true"
+     inkscape:window-width="1920"
+     inkscape:window-height="1002"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1">
+    <sodipodi:guide
+       position="124.68031,378.83634"
+       orientation="1,0"
+       id="guide1272"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="-92.412536,200.31832"
+       orientation="0,-1"
+       id="guide1274"
+       inkscape:locked="false" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata173">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#7f7f7f;stroke-width:9.68101;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:56.3;stroke-dasharray:none;stroke-opacity:1;paint-order:markers fill stroke"
+       id="rect2784"
+       width="239.86591"
+       height="364.55743"
+       x="5.4526205"
+       y="5.1585279" />
+    <text
+       xml:space="preserve"
+       style="font-size:64px;font-family:JansonText;-inkscape-font-specification:JansonText;fill:#ffffff;fill-opacity:0;stroke:#7f7f7f;stroke-width:5.5;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:56.3"
+       x="121.65739"
+       y="122.89037"
+       id="text505"><tspan
+         sodipodi:role="line"
+         id="tspan503"
+         x="121.65739"
+         y="122.89037"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:64px;font-family:'Nimbus Sans';-inkscape-font-specification:'Nimbus Sans';text-align:center;text-anchor:middle;fill:#8b8b8b;fill-opacity:1;stroke:none">Default</tspan><tspan
+         sodipodi:role="line"
+         x="121.65739"
+         y="206.34132"
+         id="tspan507"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:64px;font-family:'Nimbus Sans';-inkscape-font-specification:'Nimbus Sans';text-align:center;text-anchor:middle;fill:#8b8b8b;fill-opacity:1;stroke:none">Book</tspan><tspan
+         sodipodi:role="line"
+         x="121.65739"
+         y="289.79227"
+         id="tspan509"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:64px;font-family:'Nimbus Sans';-inkscape-font-specification:'Nimbus Sans';text-align:center;text-anchor:middle;fill:#8b8b8b;fill-opacity:1;stroke:none">Cover</tspan></text>
+  </g>
+</svg>

@@ -1,4 +1,5 @@
 #include <project_box.hh>
+#include <utils.hh>
 #include <gdkmm.h>
 
 // Resources
@@ -69,19 +70,33 @@ void ProjectBox::set_ui() {
 
 Gtk::Box* ProjectBox::set_project_ui() {
 	// Configure parent box
+	auto box_0 = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
 	auto box_1 = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::VERTICAL, 0);
-	//auto box_2 = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::VERTICAL, 0);
-	auto swn = Gtk::make_managed<Gtk::ScrolledWindow>();
-	swn->set_policy(Gtk::PolicyType::AUTOMATIC, Gtk::PolicyType::AUTOMATIC);
-  	swn->set_expand(true);
+	auto box_2 = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::VERTICAL, 0);
 
-	//box_1->append(*swn);
+	box_2->set_homogeneous(false);
+	box_2->set_margin_top(MARGINS);
+	box_2->set_margin_start(MARGINS);
+	box_2->set_margin_end(20);
+	box_2->set_margin_bottom(MARGINS);
+	box_2->set_spacing(WIDGET_SPACING);
+	box_2->set_valign(Gtk::Align::START);
+	box_2->set_halign(Gtk::Align::CENTER);
+
+	this->m_proj_pct = Gtk::make_managed<Gtk::Picture>();
+	this->m_proj_pct->set_size_request(250, 375);
+	this->m_proj_pct->set_content_fit(Gtk::ContentFit::FILL);
+	this->m_proj_pct->set_pixbuf(Utils::image_from_name("defaultcover"));
+	box_2->append(*this->m_proj_pct);
+
 	box_1->set_homogeneous(false);
-	box_1->set_size_request(650, 250);
-	box_1->set_margin(MARGINS);
+	box_1->set_size_request(650, -1);
+	box_1->set_margin_top(MARGINS);
+	box_1->set_margin_end(MARGINS);
+	box_1->set_margin_start(0);
 	box_1->set_spacing(WIDGET_SPACING);
 	box_1->set_valign(Gtk::Align::START);
-	box_1->set_halign(Gtk::Align::CENTER);
+	box_1->set_halign(Gtk::Align::START);
 
 	// Add widgets
 	auto hbx_1 = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
@@ -92,6 +107,7 @@ Gtk::Box* ProjectBox::set_project_ui() {
 	auto hbx_6 = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
 	auto hbx_7 = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
 	auto hbx_8 = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
+	auto hbx_9 = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
 
 	auto lbl_1 = Gtk::make_managed<Gtk::Label>();
 	auto lbl_2 = Gtk::make_managed<Gtk::Label>();
@@ -100,6 +116,8 @@ Gtk::Box* ProjectBox::set_project_ui() {
 	auto lbl_5 = Gtk::make_managed<Gtk::Label>();
 	auto lbl_6 = Gtk::make_managed<Gtk::Label>();
 	auto lbl_7 = Gtk::make_managed<Gtk::Label>();
+	auto lbl_9 = Gtk::make_managed<Gtk::Label>();
+	
 	this->m_proj_gdd = Gtk::make_managed<GenreDropDown>();
 	this->m_proj_gdd->set_size_request(500, -1);
 	//this->m_proj_gdd->set_hexpand(true);
@@ -110,9 +128,12 @@ Gtk::Box* ProjectBox::set_project_ui() {
 	this->m_proj_volume_ent = Gtk::make_managed<Gtk::Entry>();
 	this->m_proj_folder_ent = Gtk::make_managed<Gtk::Entry>();
 	this->m_proj_license_ent = Gtk::make_managed<Gtk::Entry>();	
+	this->m_proj_cover_ent = Gtk::make_managed<Gtk::Entry>();	
 
 	auto btn_1 = Gtk::make_managed<Gtk::Button>();
+	auto btn_9 = Gtk::make_managed<Gtk::Button>();
 	auto img_1 = Gtk::make_managed<Gtk::Image>(Gdk::Texture::create_for_pixbuf(Gdk::Pixbuf::create_from_xpm_data(folder)));
+	auto img_9 = Gtk::make_managed<Gtk::Image>(Gdk::Texture::create_for_pixbuf(Gdk::Pixbuf::create_from_xpm_data(folder)));
 
 	lbl_1->set_margin_bottom(2);
 	lbl_1->set_xalign(1);
@@ -202,6 +223,24 @@ Gtk::Box* ProjectBox::set_project_ui() {
 	hbx_7->append(*this->m_proj_folder_ent);
 	hbx_7->append(*btn_1);
 
+	lbl_9->set_margin_bottom(2);
+	lbl_9->set_xalign(1);
+	lbl_9->set_size_request(100, -1);
+	lbl_9->set_markup("<b>Cover:  </b>");
+	this->m_proj_cover_ent->set_has_frame(false);
+	this->m_proj_cover_ent->set_max_length(256);
+	this->m_proj_cover_ent->set_placeholder_text("Image file location for project");
+	this->m_proj_cover_ent->set_size_request(500);
+	this->m_proj_cover_ent->set_editable(false);
+	btn_9->set_child(*img_9);
+	btn_9->set_has_frame(false);
+	btn_9->signal_clicked().connect(sigc::mem_fun(*this, &ProjectBox::on_cover_folder_clicked));
+	btn_9->set_size_request(24, -1);
+	btn_9->set_tooltip_text("Presents a dialog to choose an image file for the project");
+	hbx_9->append(*lbl_9);
+	hbx_9->append(*this->m_proj_cover_ent);
+	hbx_9->append(*btn_9);
+
 	box_1->append(*hbx_1);
 	box_1->append(*hbx_2);
 	box_1->append(*hbx_3);
@@ -210,41 +249,72 @@ Gtk::Box* ProjectBox::set_project_ui() {
 	box_1->append(*hbx_5);
 	box_1->append(*hbx_6);
 	box_1->append(*hbx_7);
+	box_1->append(*hbx_9);
 
-	//swn->set_child(*box_2);
+	box_1->set_valign(Gtk::Align::START);
+	box_1->set_halign(Gtk::Align::CENTER);
+	box_0->set_size_request(900, -1);
+	box_0->set_halign(Gtk::Align::CENTER);
+	box_0->append(*box_2);
+	box_0->append(*box_1);
 
-	return box_1;
+	return box_0;
 }
 
 Gtk::Box* ProjectBox::set_author_ui() {
 	// Configure parent box
+	auto box_0 = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
 	auto box_1 = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::VERTICAL, 0);
-	//auto box_2 = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::VERTICAL, 0);
+	auto box_2 = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::VERTICAL, 0);
+
+	box_2->set_homogeneous(false);
+	box_2->set_margin_top(MARGINS);
+	box_2->set_margin_start(MARGINS);
+	box_2->set_margin_end(13);
+	box_2->set_margin_bottom(MARGINS);
+	box_2->set_spacing(WIDGET_SPACING);
+	box_2->set_valign(Gtk::Align::START);
+	box_2->set_halign(Gtk::Align::CENTER);
+
+	this->m_auth_pct = Gtk::make_managed<Gtk::Picture>();
+	this->m_auth_pct->set_size_request(250, 375);
+	this->m_auth_pct->set_content_fit(Gtk::ContentFit::CONTAIN);
+	this->m_auth_pct->set_pixbuf(Utils::image_from_name("defaultauthor"));
+	box_2->append(*this->m_auth_pct);
+
 	auto swn = Gtk::make_managed<Gtk::ScrolledWindow>();
 	swn->set_policy(Gtk::PolicyType::AUTOMATIC, Gtk::PolicyType::AUTOMATIC);
   	swn->set_expand(true);
 
+	auto img_9 = Gtk::make_managed<Gtk::Image>(Gdk::Texture::create_for_pixbuf(Gdk::Pixbuf::create_from_xpm_data(folder)));
+	auto btn_9 = Gtk::make_managed<Gtk::Button>();
+	
 	//box_1->append(*swn);
 	box_1->set_homogeneous(false);
-	box_1->set_size_request(650, 250);
-	box_1->set_margin(50);
+	box_1->set_size_request(650, 375);
+	box_1->set_margin_top(MARGINS);
+	box_1->set_margin_end(MARGINS);
+	box_1->set_margin_start(0);
 	box_1->set_spacing(WIDGET_SPACING);
 	box_1->set_valign(Gtk::Align::START);
-	box_1->set_halign(Gtk::Align::CENTER);
+	box_1->set_halign(Gtk::Align::START);
 
 	// Add widgets
 	auto hbx_1 = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
 	auto hbx_2 = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
 	auto hbx_3 = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
 	auto hbx_4 = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
+	auto hbx_9 = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
 
 	auto lbl_1 = Gtk::make_managed<Gtk::Label>();
 	auto lbl_2 = Gtk::make_managed<Gtk::Label>();
 	auto lbl_3 = Gtk::make_managed<Gtk::Label>();
+	auto lbl_9 = Gtk::make_managed<Gtk::Label>();
 
 	this->m_auth_name_ent = Gtk::make_managed<Gtk::Entry>();
 	this->m_auth_email_ent = Gtk::make_managed<Gtk::Entry>();
 	this->m_auth_bio_tvw = Gtk::make_managed<Gtk::TextView>();
+	this->m_auth_pict_ent = Gtk::make_managed<Gtk::Entry>();
 
 	lbl_1->set_margin_bottom(2);
 	lbl_1->set_xalign(1);
@@ -280,11 +350,37 @@ Gtk::Box* ProjectBox::set_author_ui() {
 	swn->set_child(*this->m_auth_bio_tvw);
 	hbx_3->append(*swn);
 
+	lbl_9->set_margin_bottom(2);
+	lbl_9->set_xalign(1);
+	lbl_9->set_size_request(100, -1);
+	lbl_9->set_markup("<b>Picture:  </b>");
+	this->m_auth_pict_ent->set_has_frame(false);
+	this->m_auth_pict_ent->set_max_length(256);
+	this->m_auth_pict_ent->set_placeholder_text("Image file location for author");
+	this->m_auth_pict_ent->set_size_request(500);
+	this->m_auth_pict_ent->set_editable(false);
+	btn_9->set_child(*img_9);
+	btn_9->set_has_frame(false);
+	btn_9->signal_clicked().connect(sigc::mem_fun(*this, &ProjectBox::on_auth_picture_clicked));
+	btn_9->set_size_request(24, -1);
+	btn_9->set_tooltip_text("Presents a dialog to choose an image file for the author");
+	hbx_9->append(*lbl_9);
+	hbx_9->append(*this->m_auth_pict_ent);
+	hbx_9->append(*btn_9);
+
 	box_1->append(*hbx_1);
 	box_1->append(*hbx_2);
 	box_1->append(*hbx_3);
+	box_1->append(*hbx_9);
 
-	return box_1;
+	box_1->set_valign(Gtk::Align::START);
+	box_1->set_halign(Gtk::Align::CENTER);
+	box_0->set_size_request(900, -1);
+	box_0->set_halign(Gtk::Align::CENTER);
+	box_0->append(*box_2);
+	box_0->append(*box_1);
+
+	return box_0;
 }
 
 void ProjectBox::on_folder_clicked() {
@@ -300,6 +396,68 @@ void ProjectBox::on_folder_clicked_finish(const Glib::RefPtr<Gio::AsyncResult>& 
 	try {
 		auto folder = dialog->select_folder_finish(result);
 		this->m_proj_folder_ent->set_text(folder->get_path());
+	} catch (const Gtk::DialogError& err) {
+		// Can be thrown by dialog->select_folder_finish(result).
+		//std::cout << "No folder selected. " << err.what() << std::endl;
+	} catch (const Glib::Error& err) {
+		//std::cout << "Unexpected exception. " << err.what() << std::endl;
+	}
+}
+
+void ProjectBox::on_cover_folder_clicked() {
+	auto dialog = Gtk::FileDialog::create();
+
+	// Add filters, so that only certain file types can be selected
+	auto filters = Gio::ListStore<Gtk::FileFilter>::create();
+	auto filter_images = Gtk::FileFilter::create();
+	filter_images->set_name("Image files");
+	filter_images->add_mime_type("image/png");
+	filter_images->add_mime_type("image/jpeg");
+	filters->append(filter_images);
+	dialog->set_filters(filters);
+	
+	// Show the dialog and wait for a user response:
+	dialog->open(sigc::bind(sigc::mem_fun(*this, &ProjectBox::on_cover_folder_clicked_finish), dialog));
+}
+
+void ProjectBox::on_cover_folder_clicked_finish(const Glib::RefPtr<Gio::AsyncResult>& result, 
+										  const Glib::RefPtr<Gtk::FileDialog>& dialog) {
+	// Handle the response:
+	try {
+		auto file = dialog->open_finish(result);
+		this->m_proj_cover_ent->set_text(file->get_path());
+		this->m_proj_pct->set_file(file);
+	} catch (const Gtk::DialogError& err) {
+		// Can be thrown by dialog->select_folder_finish(result).
+		//std::cout << "No folder selected. " << err.what() << std::endl;
+	} catch (const Glib::Error& err) {
+		//std::cout << "Unexpected exception. " << err.what() << std::endl;
+	}
+}
+
+void ProjectBox::on_auth_picture_clicked() {
+	auto dialog = Gtk::FileDialog::create();
+
+	// Add filters, so that only certain file types can be selected
+	auto filters = Gio::ListStore<Gtk::FileFilter>::create();
+	auto filter_images = Gtk::FileFilter::create();
+	filter_images->set_name("Image files");
+	filter_images->add_mime_type("image/png");
+	filter_images->add_mime_type("image/jpeg");
+	filters->append(filter_images);
+	dialog->set_filters(filters);
+	
+	// Show the dialog and wait for a user response:
+	dialog->open(sigc::bind(sigc::mem_fun(*this, &ProjectBox::on_auth_picture_clicked_finish), dialog));
+}
+
+void ProjectBox::on_auth_picture_clicked_finish(const Glib::RefPtr<Gio::AsyncResult>& result, 
+										  const Glib::RefPtr<Gtk::FileDialog>& dialog) {
+	// Handle the response:
+	try {
+		auto file = dialog->open_finish(result);
+		this->m_auth_pict_ent->set_text(file->get_path());
+		this->m_auth_pct->set_file(file);
 	} catch (const Gtk::DialogError& err) {
 		// Can be thrown by dialog->select_folder_finish(result).
 		//std::cout << "No folder selected. " << err.what() << std::endl;

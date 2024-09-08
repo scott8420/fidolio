@@ -20,13 +20,17 @@ protected:
 	Gtk::Entry* m_proj_subtitle_ent;
 	Gtk::Entry* m_proj_series_ent;
 	Gtk::Entry* m_proj_volume_ent;
+	Gtk::Entry* m_proj_cover_ent;
 	Gtk::DropDown* m_proj_genre_ddn;
 	Gtk::Entry* m_proj_license_ent;
 	Gtk::Entry* m_proj_folder_ent;
 	Gtk::Entry* m_auth_name_ent;
 	Gtk::Entry* m_auth_email_ent;
+	Gtk::Entry* m_auth_pict_ent;
 	Gtk::TextView* m_auth_bio_tvw;
 	GenreDropDown* m_proj_gdd;
+	Gtk::Picture* m_proj_pct;
+	Gtk::Picture* m_auth_pct;
 
 	void set_ui();
 	Gtk::Box* set_project_ui();
@@ -35,6 +39,12 @@ protected:
 
 	void on_folder_clicked();
 	void on_folder_clicked_finish(const Glib::RefPtr<Gio::AsyncResult>&, const Glib::RefPtr<Gtk::FileDialog>&);
+
+	void on_cover_folder_clicked();
+	void on_cover_folder_clicked_finish(const Glib::RefPtr<Gio::AsyncResult>&, const Glib::RefPtr<Gtk::FileDialog>&);
+
+	void on_auth_picture_clicked();
+	void on_auth_picture_clicked_finish(const Glib::RefPtr<Gio::AsyncResult>&, const Glib::RefPtr<Gtk::FileDialog>&);
 
 private:
 	ProjectBox() = delete;
