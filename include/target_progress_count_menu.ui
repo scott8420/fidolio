@@ -1,0 +1,27 @@
+#ifndef __TARGET_PROGRESS_COUNT_MENU__
+#define __TARGET_PROGRESS_COUNT_MENU__
+
+Glib::ustring ui_menu_count =
+  "<interface>"
+  "  <menu id='count-menu-popup'>"
+  "    <section>"
+  "      <item>"
+  "        <attribute name='id'>count_actions_words</attribute>"
+  "        <attribute name='label' translatable='yes'>Words</attribute>"
+  "        <attribute name='action'>count_actions.words</attribute>"
+  "      </item>"
+  "      <item>"
+  "        <attribute name='id'>count_actions_characters</attribute>"
+  "        <attribute name='label' translatable='yes'>Characters</attribute>"
+  "        <attribute name='action'>count_actions.characters</attribute>"
+  "      </item>"
+  "      <item>"
+  "        <attribute name='id'>count_actions_pages</attribute>"
+  "        <attribute name='label' translatable='yes'>Pages</attribute>"
+  "        <attribute name='action'>count_actions.pages</attribute>"
+  "      </item>"
+  "    </section>"
+  "  </menu>"
+  "</interface>";
+  
+  #endif

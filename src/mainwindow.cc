@@ -160,6 +160,7 @@ void MainWindow::set_ui() {
 }
 
 void MainWindow::set_headerbar() {
+    //open-menu-symbolic
     this->m_fidolio_mbtn.set_label("");
     auto fidolio_img = Gtk::make_managed<Gtk::Image>(Gdk::Texture::create_for_pixbuf(Utils::image_from_xpm(fidolio))); //  Gtk::make_managed<Gtk::Image>(Gdk::Texture::create_for_pixbuf(Gdk::Pixbuf::create_from_xpm_data(fidolio)));
     this->m_fidolio_mbtn.set_child(*fidolio_img);
@@ -171,8 +172,9 @@ void MainWindow::set_headerbar() {
 
     this->m_open_menu_mbtn.set_label("Open");
     auto open_menu_img = Gtk::make_managed<Gtk::Image>(Gdk::Texture::create_for_pixbuf(Utils::image_from_xpm(open_menu)));
-    this->m_open_menu_mbtn.set_child(*open_menu_img);
-    this->m_open_menu_mbtn.set_has_frame(true);
+    this->m_open_menu_mbtn.set_icon_name("open-menu-symbolic");
+    //this->m_open_menu_mbtn.set_child(*open_menu_img);
+    this->m_open_menu_mbtn.set_has_frame(false);
     this->m_builder->add_from_string(ui_menu_open_menu);
     this->m_open_menu_menu = this->m_builder->get_object<Gio::Menu>("open-menu-popup");
     this->m_open_menu_mbtn.set_menu_model(this->m_open_menu_menu);
@@ -180,8 +182,11 @@ void MainWindow::set_headerbar() {
 
     this->m_explore_mbtn.set_label("Explorer");
     auto explore_img = Gtk::make_managed<Gtk::Image>(Gdk::Texture::create_for_pixbuf(Utils::image_from_xpm(explore)));
-    this->m_explore_mbtn.set_child(*explore_img);
-    this->m_explore_mbtn.set_has_frame(true);
+    //this->m_explore_mbtn.set_child(*explore_img);
+    this->m_explore_mbtn.set_icon_name("explore2-symbolic");
+    this->m_explore_mbtn.set_has_frame(false);
+    this->m_explore_mbtn.set_always_show_arrow(true);
+    this->m_explore_mbtn.set_tooltip_text("Navigator menu to directly set viewport");
     this->m_builder->add_from_string(ui_menu_explore);
     this->m_explore_menu = this->m_builder->get_object<Gio::Menu>("explore-menu-popup");
     this->m_explore_mbtn.set_menu_model(this->m_explore_menu);

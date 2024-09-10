@@ -26,5 +26,7 @@ private:
 
 #define WINDOW Globals::get()->m_window
 #define APP Globals::get()->m_app
+#define MARGINS 50
+#define WIDGET_SPACING 10
 
 #endif

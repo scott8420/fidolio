@@ -1,12 +1,11 @@
 #include <project_box.hh>
 #include <utils.hh>
+#include <globals.hh>
+#include <target_box.hh>
 #include <gdkmm.h>
 
 // Resources
 #include <folder.xpm>
-
-#define MARGINS 50
-#define WIDGET_SPACING 10
 
 ProjectBox::ProjectBox(void* data) : m_data(data) {
 	this->set_ui();
@@ -50,7 +49,7 @@ void ProjectBox::set_ui() {
 	// Make views for pages
 	auto proj_viw = this->set_project_ui();
 	auto auth_viw = this->set_author_ui();
-	auto targ_viw = Gtk::make_managed<Gtk::Label>("Target View");
+	auto targ_viw = Gtk::make_managed<TargetBox>(nullptr);
 	auto styl_viw = Gtk::make_managed<Gtk::Label>("Styles View");
 	auto keyb_viw = Gtk::make_managed<Gtk::Label>("Keyboard Shortcuts View");
 	auto pref_viw = Gtk::make_managed<Gtk::Label>("Preferences View");
@@ -76,7 +75,7 @@ Gtk::Box* ProjectBox::set_project_ui() {
 
 	box_2->set_homogeneous(false);
 	box_2->set_margin_top(MARGINS);
-	box_2->set_margin_start(MARGINS);
+	box_2->set_margin_start(MARGINS+7);
 	box_2->set_margin_end(20);
 	box_2->set_margin_bottom(MARGINS);
 	box_2->set_spacing(WIDGET_SPACING);

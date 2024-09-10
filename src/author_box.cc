@@ -25,9 +25,9 @@ void AuthorBox::set_ui() {
 	auto biog_hbx = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
 	
 	// Make labels
-	auto name_lbl = Gtk::make_managed<Gtk::Label>("Name");
-	auto emai_lbl = Gtk::make_managed<Gtk::Label>("Author");
-	auto biog_lbl = Gtk::make_managed<Gtk::Label>("Target");
+	auto name_lbl = Gtk::make_managed<Gtk::Label>("Name: ");
+	auto emai_lbl = Gtk::make_managed<Gtk::Label>("Author: ");
+	auto biog_lbl = Gtk::make_managed<Gtk::Label>("Bio: ");
 
 
 }
