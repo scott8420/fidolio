@@ -2,6 +2,7 @@
 #define __TARGET_PROGRESS_BOX__
 
 #include <gtkmm.h>
+#include <date_picker.hh>
 
 class TargetProgressBox : public Gtk::Box {
 public:
@@ -21,12 +22,26 @@ protected:
 	Gtk::TextView* m_auth_bio_tvw;
 	Glib::RefPtr<Gtk::Builder> m_builder;
 	Gtk::ProgressBar m_target_pgr;
+	Gtk::Label m_target_count_lbl;
+	Gtk::Separator m_target_sep;
+	Gtk::Entry m_session_count_ent;
+	Gtk::DropDown m_session_count_ddn;
+	Gtk::ProgressBar m_session_pgr;
+	Gtk::Button m_session_btn;
+	Gtk::Label m_session_count_lbl;
+	Gtk::CheckButton m_target_deadline_cbx;
+	Gtk::CheckButton m_target_notifications_cbx;
+	DatePicker m_target_deadline_dpk;
 	
 	void set_ui();
 
 protected:
+	void on_count_entry_changed();
 	void on_count_dropdown_changed();
-
+	void on_session_btn_clicked();
+	void on_session_dropdown_changed();
+	void on_session_count_entry_changed();
+	
 private:
 	TargetProgressBox() = delete;
 

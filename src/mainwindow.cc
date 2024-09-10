@@ -171,7 +171,7 @@ void MainWindow::set_headerbar() {
     this->m_hbr.pack_start(this->m_fidolio_mbtn);
 
     this->m_open_menu_mbtn.set_label("Open");
-    auto open_menu_img = Gtk::make_managed<Gtk::Image>(Gdk::Texture::create_for_pixbuf(Utils::image_from_xpm(open_menu)));
+    //auto open_menu_img = Gtk::make_managed<Gtk::Image>(Gdk::Texture::create_for_pixbuf(Utils::image_from_xpm(open_menu)));
     this->m_open_menu_mbtn.set_icon_name("open-menu-symbolic");
     //this->m_open_menu_mbtn.set_child(*open_menu_img);
     this->m_open_menu_mbtn.set_has_frame(false);
