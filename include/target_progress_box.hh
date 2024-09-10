@@ -18,7 +18,8 @@ protected:
 	Gtk::ProgressBar m_target_count_pbr;
 	Gtk::DropDown m_target_count_ddn;
 	Gtk::Entry m_auth_email_ent;
-	Glib::RefPtr<Gtk::StringList> m_string_list;
+	Glib::RefPtr<Gtk::StringList> m_target_string_list;
+	Glib::RefPtr<Gtk::StringList> m_session_string_list;
 	Gtk::TextView* m_auth_bio_tvw;
 	Glib::RefPtr<Gtk::Builder> m_builder;
 	Gtk::ProgressBar m_target_pgr;
@@ -36,10 +37,10 @@ protected:
 	void set_ui();
 
 protected:
-	void on_count_entry_changed();
-	void on_count_dropdown_changed();
+	void on_target_count_entry_changed();
+	void on_target_count_dropdown_changed();
 	void on_session_btn_clicked();
-	void on_session_dropdown_changed();
+	void on_session_count_dropdown_changed();
 	void on_session_count_entry_changed();
 	
 private:

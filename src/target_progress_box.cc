@@ -34,16 +34,18 @@ void TargetProgressBox::set_ui() {
 	lbl_1->set_xalign(1);
 
 	this->m_target_count_ent.set_placeholder_text("Enter only number values");
-	this->m_target_count_ent.signal_changed().connect(sigc::mem_fun(*this, &TargetProgressBox::on_count_entry_changed));
+	this->m_target_count_ent.signal_changed().connect(sigc::mem_fun(*this, &TargetProgressBox::on_target_count_entry_changed));
 	this->m_target_count_ent.set_hexpand(true);
 	//this->m_builder = Gtk::Builder::create_from_string(ui_menu_count);
-    const std::vector<Glib::ustring> strings{ "Characters", "Words", "Pages" };
-	this->m_string_list = Gtk::StringList::create(strings);
-    this->m_target_count_ddn.set_model(this->m_string_list);
+    const std::vector<Glib::ustring> strings_1{ "Characters", "Words", "Pages" };
+	const std::vector<Glib::ustring> strings_2{ "Characters", "Words", "Pages" };
+	this->m_target_string_list = Gtk::StringList::create(strings_1);
+	this->m_session_string_list = Gtk::StringList::create(strings_2);
+    this->m_target_count_ddn.set_model(this->m_target_string_list);
 	this->m_target_count_ddn.set_selected(1);
 	
 	// Connect signal handler:
-  	this->m_target_count_ddn.property_selected().signal_changed().connect(sigc::mem_fun(*this, &TargetProgressBox::on_count_dropdown_changed));
+  	this->m_target_count_ddn.property_selected().signal_changed().connect(sigc::mem_fun(*this, &TargetProgressBox::on_target_count_dropdown_changed));
 	
 	hbx_1->append(*lbl_1);
 	hbx_1->append(this->m_target_count_ent);
@@ -62,7 +64,7 @@ void TargetProgressBox::set_ui() {
 	this->m_target_pgr.set_show_text(true);
 	this->m_target_pgr.set_hexpand(true);
 	hbx_2->append(this->m_target_pgr);
-	this->m_target_count_lbl.set_halign(Gtk::Align::CENTER);
+	//this->m_target_count_lbl.set_halign(Gtk::Align::CENTER);
 	hbx_2->append(this->m_target_count_lbl);
 	this->m_target_sep.set_orientation(Gtk::Orientation::HORIZONTAL);
 	this->m_target_sep.set_size_request(-1, 5);
@@ -93,10 +95,9 @@ void TargetProgressBox::set_ui() {
 	lbl_3->set_xalign(0);
 
 	this->m_session_count_ent.signal_changed().connect(sigc::mem_fun(*this, &TargetProgressBox::on_session_count_entry_changed));
-    this->m_session_count_ddn.set_model(this->m_string_list);
+    this->m_session_count_ddn.set_model(this->m_session_string_list);
 	this->m_session_count_ddn.set_selected(1);
-	this->m_target_count_ddn.property_selected().signal_changed().connect(sigc::mem_fun(*this, &TargetProgressBox::on_session_dropdown_changed));
-	this->m_session_count_lbl.set_halign(Gtk::Align::CENTER);
+	this->m_session_count_ddn.property_selected().signal_changed().connect(sigc::mem_fun(*this, &TargetProgressBox::on_session_count_dropdown_changed));
 	this->m_session_count_ent.set_placeholder_text("Enter only number values");
 	this->m_session_count_ent.set_hexpand(true);
 
@@ -107,14 +108,10 @@ void TargetProgressBox::set_ui() {
 	this->m_session_btn.signal_clicked().connect(sigc::mem_fun(*this, &TargetProgressBox::on_session_btn_clicked));
 	
 	hbx_3->set_spacing(WIDGET_SPACING);
-	// hbx_4->append(this->m_session_count_ent);
-	// hbx_4->set_hexpand(true);
-	// hbx_3->append(*hbx_4);
 	hbx_5->set_halign(Gtk::Align::END);
 	hbx_5->append(this->m_session_btn);
 	hbx_5->append(this->m_session_count_ddn);
 	
-
 	auto hbx_6 = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
 	hbx_6->set_spacing(WIDGET_SPACING);
 	hbx_6->set_margin_top(WIDGET_SPACING);
@@ -124,8 +121,6 @@ void TargetProgressBox::set_ui() {
 	this->m_session_pgr.set_show_text(true);
 	this->m_session_pgr.set_hexpand(true);
 	hbx_6->append(this->m_session_pgr);
-	this->m_session_count_lbl.set_halign(Gtk::Align::CENTER);
-	this->m_session_count_lbl.set_text("0 of 0");
 	hbx_6->append(this->m_session_count_lbl);
 
 	hbx_3->append(*lbl_3);
@@ -140,24 +135,25 @@ void TargetProgressBox::set_ui() {
 	this->append(*hbx_3);
 	this->append(*hbx_6);
 
-	this->on_count_dropdown_changed();
+	this->on_target_count_dropdown_changed();
+	this->on_session_count_dropdown_changed();
 }
 
 void TargetProgressBox::on_session_btn_clicked() {
 	Utils::msg_box(WINDOW, "Button Clicked", "Session Reset Button Clicked");
 }
 
-void TargetProgressBox::on_count_entry_changed() {
-	this->on_count_dropdown_changed();
+void TargetProgressBox::on_target_count_entry_changed() {
+	this->on_target_count_dropdown_changed();
 }
 
-void TargetProgressBox::on_count_dropdown_changed() {
+void TargetProgressBox::on_target_count_dropdown_changed() {
 	auto count = this->m_target_count_ent.get_text();
 	if (count == "") {
 		count = "0";
 	}
 	auto selected = this->m_target_count_ddn.get_selected();
-	auto type = this->m_string_list->get_string(selected);
+	auto type = this->m_target_string_list->get_string(selected);
 	this->m_target_count_lbl.set_text("0 of " + count + " " + type);
 }
 
@@ -192,17 +188,17 @@ void TargetProgressBox::validate_text() {
     //g_signal_stop_emission_by_name(G_OBJECT(&this->m_target_count_ent), "insert-text");
 }
 
-void TargetProgressBox::on_session_dropdown_changed() {
+void TargetProgressBox::on_session_count_dropdown_changed() {
 	auto count = this->m_session_count_ent.get_text();
 	if (count == "") {
 		count = "0";
 	}
 	auto selected = this->m_session_count_ddn.get_selected();
-	auto type = this->m_string_list->get_string(selected);
+	auto type = this->m_session_string_list->get_string(selected);
 	this->m_session_count_lbl.set_text("0 of " + count + " " + type);
 
 }
 	
 void TargetProgressBox::on_session_count_entry_changed(){
-	this->on_session_dropdown_changed();
+	this->on_session_count_dropdown_changed();
 }
