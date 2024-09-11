@@ -200,6 +200,7 @@ Gtk::Box* ProjectBox::set_project_ui() {
 	auto sep_1 = Gtk::make_managed<Gtk::Separator>(Gtk::Orientation::HORIZONTAL);
 	sep_1->set_margin_top(20);
 	sep_1->set_margin_bottom(20);
+	sep_1->set_size_request(-1, 5);
 	sep_1->set_hexpand(true);
 	
 	hbx_6->append(*sep_1);

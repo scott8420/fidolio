@@ -128,12 +128,43 @@ void TargetProgressBox::set_ui() {
 	hbx_3->append(*hbx_5);
 	hbx_3->set_hexpand(true);
 
+	auto hbx_11 = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
+	auto hbx_12 = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
+	auto hbx_13 = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
+	auto hbx_14 = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
+
+	this->m_session_writing_days_cbx.set_label("Writing Days");
+	hbx_11->set_halign(Gtk::Align::START);
+	hbx_11->append(this->m_session_writing_days_cbx);
+	
+	this->m_session_notifications_cbx.set_label("Show Notifications");
+	hbx_12->set_halign(Gtk::Align::END);
+	hbx_12->append(this->m_session_notifications_cbx);
+
+	hbx_14->set_hexpand(true);
+	hbx_13->append(*hbx_11);
+	hbx_13->append(*hbx_14);
+	hbx_13->append(*hbx_12);
+
+	auto hbx_15 = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
+	auto hbx_16 = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
+	auto hbx_17 = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
+
+	hbx_15->set_hexpand(true);
+	hbx_16->set_hexpand(true);
+	hbx_17->append(*hbx_15);
+	hbx_17->append(this->m_wtb);
+	hbx_17->append(*hbx_16);
+	hbx_17->set_margin(WIDGET_SPACING);
+	
 	this->append(*hbx_1);
 	this->append(*hbx_2);
 	this->append(*hbx_10);
 	this->append(this->m_target_sep);
 	this->append(*hbx_3);
 	this->append(*hbx_6);
+	this->append(*hbx_13);
+	this->append(*hbx_17);
 
 	this->on_target_count_dropdown_changed();
 	this->on_session_count_dropdown_changed();

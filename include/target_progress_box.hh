@@ -3,6 +3,7 @@
 
 #include <gtkmm.h>
 #include <date_picker.hh>
+#include <week_togglebutton_box.hh>
 
 class TargetProgressBox : public Gtk::Box {
 public:
@@ -32,7 +33,11 @@ protected:
 	Gtk::Label m_session_count_lbl;
 	Gtk::CheckButton m_target_deadline_cbx;
 	Gtk::CheckButton m_target_notifications_cbx;
+	Gtk::CheckButton m_session_writing_days_cbx;
+	Gtk::CheckButton m_session_notifications_cbx;
+
 	DatePicker m_target_deadline_dpk;
+	WeekToggleButtonBox m_wtb;
 	
 	void set_ui();
 
