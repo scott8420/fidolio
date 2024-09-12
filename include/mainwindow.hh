@@ -40,6 +40,7 @@ protected:
     Gtk::MenuButton m_fidolio_mbtn;
     Gtk::MenuButton m_explore_mbtn;
     Gtk::MenuButton m_open_menu_mbtn;
+    Gtk::MenuButton m_pomodoro_menu_mbtn;
     Gtk::AboutDialog m_about_dlg;
     Gtk::Paned m_project_pnd;
     ProjectBox* m_pb;
@@ -47,10 +48,12 @@ protected:
     Glib::RefPtr<Gio::Menu> m_fidolio_menu;
     Glib::RefPtr<Gio::Menu> m_explore_menu;
     Glib::RefPtr<Gio::Menu> m_open_menu_menu;
+    Glib::RefPtr<Gio::Menu> m_pomodoro_menu;
     Glib::RefPtr<Gio::SimpleActionGroup> m_action_group_fidolio;
     Glib::RefPtr<Gio::SimpleActionGroup> m_action_group_navigate;
     Glib::RefPtr<Gio::SimpleActionGroup> m_action_group_file;
     Glib::RefPtr<Gio::SimpleActionGroup> m_action_group_explore;
+    Glib::RefPtr<Gio::SimpleActionGroup> m_action_group_pomodoro;
     Glib::RefPtr<Gtk::Builder> m_builder;
  
     // ACTIONS

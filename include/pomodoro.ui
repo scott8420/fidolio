@@ -1,0 +1,22 @@
+#ifndef __POMODORO_MENU__
+#define __POMODORO_MENU__
+
+Glib::ustring ui_menu_pomodoro =
+  "<interface>"
+  "  <menu id='pomodoro-menu-popup'>"
+  "    <section>"
+  "      <item>"
+  "        <attribute name='id'>pomodoro_actions_start</attribute>"
+  "        <attribute name='label' translatable='yes'>Start</attribute>"
+  "        <attribute name='action'>pomodoro_actions.start</attribute>"
+  "      </item>"
+  "      <item>"
+  "        <attribute name='id'>pomodoro_actions_stop</attribute>"
+  "        <attribute name='label' translatable='yes'>Stop</attribute>"
+  "        <attribute name='action'>pomodoro_actions.stop</attribute>"
+  "      </item>"
+  "    </section>"
+  "  </menu>"
+  "</interface>";
+  
+  #endif

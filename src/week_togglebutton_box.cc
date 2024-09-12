@@ -23,6 +23,7 @@ std::bitset<7> WeekToggleButtonBox::get_bitset() {
 
 void WeekToggleButtonBox::set_ui() {
 	this->set_orientation(Gtk::Orientation::HORIZONTAL);
+	this->set_spacing(0);
 
 	this->m_sunday.set_label("Sun");
 	this->m_monday.set_label("Mon");
@@ -31,6 +32,14 @@ void WeekToggleButtonBox::set_ui() {
 	this->m_thursday.set_label("Thu");
 	this->m_friday.set_label("Fri");
 	this->m_saturday.set_label("Sat");
+
+	this->m_sunday.set_has_frame(true);
+	this->m_monday.set_has_frame(true);
+	this->m_tuesday.set_has_frame(true);
+	this->m_wednesday.set_has_frame(true);
+	this->m_thursday.set_has_frame(true);
+	this->m_friday.set_has_frame(true);
+	this->m_saturday.set_has_frame(true);
 
 	this->m_sunday.signal_toggled().connect(sigc::bind(sigc::mem_fun(*this, &WeekToggleButtonBox::on_toggle_changed), DayOfWeek::SUNDAY));
 	this->m_monday.signal_toggled().connect(sigc::bind(sigc::mem_fun(*this, &WeekToggleButtonBox::on_toggle_changed), DayOfWeek::MONDAY));

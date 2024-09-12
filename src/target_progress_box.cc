@@ -9,7 +9,6 @@
 #include <reset.xpm>
 
 TargetProgressBox::TargetProgressBox(void* data) : m_data(data) {
-
 	this->set_ui();
 }
 
@@ -156,7 +155,7 @@ void TargetProgressBox::set_ui() {
 	hbx_17->append(this->m_wtb);
 	hbx_17->append(*hbx_16);
 	hbx_17->set_margin(WIDGET_SPACING);
-	
+
 	this->append(*hbx_1);
 	this->append(*hbx_2);
 	this->append(*hbx_10);
@@ -185,7 +184,7 @@ void TargetProgressBox::on_target_count_dropdown_changed() {
 	}
 	auto selected = this->m_target_count_ddn.get_selected();
 	auto type = this->m_target_string_list->get_string(selected);
-	this->m_target_count_lbl.set_text("0 of " + count + " " + type);
+	this->m_target_count_lbl.set_text("0 of " + count + " " + type + " ");
 }
 
 void TargetProgressBox::validate_text() {
@@ -226,7 +225,7 @@ void TargetProgressBox::on_session_count_dropdown_changed() {
 	}
 	auto selected = this->m_session_count_ddn.get_selected();
 	auto type = this->m_session_string_list->get_string(selected);
-	this->m_session_count_lbl.set_text("0 of " + count + " " + type);
+	this->m_session_count_lbl.set_text("0 of " + count + " " + type + " ");
 
 }
 	

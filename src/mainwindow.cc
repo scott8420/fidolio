@@ -19,11 +19,13 @@
 #include <trash.xpm>
 #include <explore.xpm>
 #include <open-menu.xpm>
+#include <pomodoro.xpm>
 
 // Resources
 #include <fidolio_menu.ui>
 #include <explore_menu.ui>
 #include <open-menu_menu.ui>
+#include <pomodoro.ui>
 
 MainWindow::MainWindow() :
     m_project_pnd(Gtk::Orientation::HORIZONTAL) {
@@ -170,6 +172,7 @@ void MainWindow::set_headerbar() {
     this->m_fidolio_mbtn.set_menu_model(this->m_fidolio_menu);
     this->m_hbr.pack_start(this->m_fidolio_mbtn);
 
+
     this->m_open_menu_mbtn.set_label("Open");
     //auto open_menu_img = Gtk::make_managed<Gtk::Image>(Gdk::Texture::create_for_pixbuf(Utils::image_from_xpm(open_menu)));
     this->m_open_menu_mbtn.set_icon_name("open-menu-symbolic");
@@ -191,6 +194,15 @@ void MainWindow::set_headerbar() {
     this->m_explore_menu = this->m_builder->get_object<Gio::Menu>("explore-menu-popup");
     this->m_explore_mbtn.set_menu_model(this->m_explore_menu);
     this->m_hbr.pack_end(this->m_explore_mbtn); 
+
+    this->m_pomodoro_menu_mbtn.set_label("");
+    auto pomodoro_img = Gtk::make_managed<Gtk::Image>(Gdk::Texture::create_for_pixbuf(Utils::image_from_xpm(pomodoro))); //  Gtk::make_managed<Gtk::Image>(Gdk::Texture::create_for_pixbuf(Gdk::Pixbuf::create_from_xpm_data(fidolio)));
+    this->m_pomodoro_menu_mbtn.set_child(*pomodoro_img);
+    this->m_pomodoro_menu_mbtn.set_has_frame(false);
+    this->m_builder->add_from_string(ui_menu_pomodoro);
+    this->m_pomodoro_menu = this->m_builder->get_object<Gio::Menu>("pomodoro-menu-popup");
+    this->m_pomodoro_menu_mbtn.set_menu_model(this->m_pomodoro_menu);
+    this->m_hbr.pack_end(this->m_pomodoro_menu_mbtn);
 
     this->set_titlebar(this->m_hbr);
 }
