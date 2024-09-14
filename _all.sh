@@ -1,4 +1,5 @@
 #!/bin/bash
-source ./scan.sh
-source ./clean_configure.sh
-source ./build.sh
+source ./_scan.sh
+source ./_clean.sh
+source ./_configure.sh
+source ./_build.sh

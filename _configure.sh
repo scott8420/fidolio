@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ./clean_project.sh
+source ./_clean.sh
 
 aclocal
 sleep 1
