@@ -421,8 +421,8 @@ void ProjectBox::on_cover_folder_clicked() {
 }
 
 void ProjectBox::on_cover_folder_clicked_finish(const Glib::RefPtr<Gio::AsyncResult>& result, 
-										  const Glib::RefPtr<Gtk::FileDialog>& dialog) {
-	// Handle the response:
+										 		 const Glib::RefPtr<Gtk::FileDialog>& dialog) {
+	// Handle the response:No folder selected
 	try {
 		auto file = dialog->open_finish(result);
 		this->m_proj_cover_ent->set_text(file->get_path());
@@ -431,7 +431,7 @@ void ProjectBox::on_cover_folder_clicked_finish(const Glib::RefPtr<Gio::AsyncRes
 		// Can be thrown by dialog->select_folder_finish(result).
 		//std::cout << "No folder selected. " << err.what() << std::endl;
 	} catch (const Glib::Error& err) {
-		//std::cout << "Unexpected exception. " << err.what() << std::endl;
+		//std::cout << "Unexpected error. " << err.what() << std::endl;
 	}
 }
 
@@ -452,7 +452,7 @@ void ProjectBox::on_auth_picture_clicked() {
 }
 
 void ProjectBox::on_auth_picture_clicked_finish(const Glib::RefPtr<Gio::AsyncResult>& result, 
-										  const Glib::RefPtr<Gtk::FileDialog>& dialog) {
+										  		const Glib::RefPtr<Gtk::FileDialog>& dialog) {
 	// Handle the response:
 	try {
 		auto file = dialog->open_finish(result);
@@ -462,6 +462,6 @@ void ProjectBox::on_auth_picture_clicked_finish(const Glib::RefPtr<Gio::AsyncRes
 		// Can be thrown by dialog->select_folder_finish(result).
 		//std::cout << "No folder selected. " << err.what() << std::endl;
 	} catch (const Glib::Error& err) {
-		//std::cout << "Unexpected exception. " << err.what() << std::endl;
+		//std::cout << "Unexpected error. " << err.what() << std::endl;
 	}
 }

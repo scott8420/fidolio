@@ -1,7 +1,6 @@
 #include <author_box.hh>
 
 // Resources
-
 AuthorBox::AuthorBox(void* data) : m_data(data) {
 
 	this->set_ui();
