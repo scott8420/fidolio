@@ -1,10 +1,11 @@
 #!/bin/bash
+
 source ./clean_project.sh
 
 aclocal
-sleep 3
+sleep 1
 automake --add-missing
-sleep 3
+sleep 1
 autoreconf
 
 if [[ -d "./build" ]]; then

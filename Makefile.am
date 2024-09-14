@@ -1,8 +1,10 @@
+#Regenerated Makefile.am from scan.sh
+
 AUTOMAKE_OPTIONS = subdir-objects
 
 bin_PROGRAMS = fidolio
 
-fidolio_CPPFLAGS = @GTK4_CFLAGS@ -I../include/ -std=c++17  
+fidolio_CPPFLAGS = @GTK4_CFLAGS@ -I../include/ -std=c++17
 
 fidolio_LDADD = @GTK4_LIBS@
 
@@ -54,5 +56,4 @@ fidolio_SOURCES = \
 	include/utils.hh \
 	include/week_togglebutton_box.hh \
 	include/western.xpm \
-	include/world.xpm 
-	
+	include/world.xpm

@@ -1,8 +1,10 @@
 #!/bin/bash
+
 if [[ -d "./build" ]]; then
 	cd ./build
 
 	if [[ -f "./Makefile" ]]; then
+		make clean
 		make maintainer-clean
 	fi
 	
