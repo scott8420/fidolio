@@ -15,7 +15,8 @@
 				"binaryPath": "/home/scott/Develop/gtk/fidolio/bin/fidolio",
 				"binaryArgs": []
 			}
-		]
+		],
+		"makefile.makefilePath": "/home/scott/Develop/gtk/fidolio/build/Makefile"
 	}
 }
 

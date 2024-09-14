@@ -6,6 +6,7 @@
 *.lo
 *.o
 *.obj
+*.Po
 
 # Precompiled Headers
 *.gch
@@ -47,3 +48,4 @@ build/config.status
 build/Makefile
 build/src
 build/stamp-h1
+.dirstamp
