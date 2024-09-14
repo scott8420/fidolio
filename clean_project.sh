@@ -6,10 +6,6 @@ if [[ -d "./build" ]]; then
 		make maintainer-clean
 	fi
 	
-	if [[ -d "./src" ]]; then
-		rm -rf ./src
-	fi
-	
 	cd ..
 fi
 
@@ -56,3 +52,5 @@ fi
 if [[ -f "./install-sh" ]]; then
 	rm -f ./install-sh
 fi
+
+echo 'Project has been cleaned of all autotools files'
