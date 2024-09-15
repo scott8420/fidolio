@@ -7,6 +7,7 @@
 
 PomodoroBox::PomodoroBox(void* data) : m_data(data) {
 	this->set_ui();
+	this->on_reset_clicked();
 }
 
 void PomodoroBox::set_data(void* value) {

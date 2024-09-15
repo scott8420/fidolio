@@ -1,7 +1,5 @@
 #!/bin/bash
 
-source ./_clean.sh
-
 aclocal
 sleep 1
 automake --add-missing

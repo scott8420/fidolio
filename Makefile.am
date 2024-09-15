@@ -4,7 +4,7 @@ AUTOMAKE_OPTIONS = subdir-objects
 
 bin_PROGRAMS = fidolio
 
-fidolio_CPPFLAGS = @GTK4_CFLAGS@ -I../include/ -std=c++17
+fidolio_CPPFLAGS = @GTK4_CFLAGS@ -I../include/ -std=c++20
 
 fidolio_LDADD = @GTK4_LIBS@
 
@@ -16,6 +16,7 @@ fidolio_SOURCES = \
 	src/main.cc \
 	src/mainwindow.cc \
 	src/pomodoro_box.cc \
+	src/pomodoro_drawingarea.cc \
 	src/project_box.cc \
 	src/target_box.cc \
 	src/target_progress_box.cc \
@@ -44,6 +45,7 @@ fidolio_SOURCES = \
 	include/outline.xpm \
 	include/people.xpm \
 	include/pomodoro_box.hh \
+	include/pomodoro_drawingarea.hh \
 	include/pomodoro.ui \
 	include/pomodoro.xpm \
 	include/project_box.hh \

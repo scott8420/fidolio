@@ -6,6 +6,11 @@ AM_INIT_AUTOMAKE([-Wall -Werror foreign])
 
 # Checks for programs
 
+# Compiler variable override
+if test -z $CXXFLAGS; then
+    CXXFLAGS='-g'
+fi
+
 # Use g++ compiler
 AC_PROG_CXX
 

@@ -3,7 +3,6 @@
 
 #include <gtkmm.h>
 
-
 enum {
     HOME = 0,
     SUMMARY,

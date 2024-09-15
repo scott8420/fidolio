@@ -10,7 +10,7 @@ echo -e "AUTOMAKE_OPTIONS = subdir-objects" >> ./Makefile.am
 echo -e "" >> ./Makefile.am
 echo -e "bin_PROGRAMS = fidolio" >> ./Makefile.am
 echo -e "" >> ./Makefile.am
-echo -e "fidolio_CPPFLAGS = @GTK4_CFLAGS@ -I../include/ -std=c++17" >> ./Makefile.am  
+echo -e "fidolio_CPPFLAGS = @GTK4_CFLAGS@ -I../include/ -std=c++20" >> ./Makefile.am  
 echo -e "" >> ./Makefile.am
 echo -e "fidolio_LDADD = @GTK4_LIBS@" >> ./Makefile.am
 echo -e "" >> ./Makefile.am
