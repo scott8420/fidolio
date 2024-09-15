@@ -22,7 +22,8 @@ enum {
     HOME_TARGET,
     HOME_TEXT_STYLES,
     HOME_KEYBOARD_SHORTCUTS,
-    HOME_PREFERENCES
+    HOME_PREFERENCES,
+    HOME_POMODORO
 };
 
 class ProjectBox;
@@ -64,6 +65,7 @@ protected:
     void on_action_home_text_styles();
     void on_action_home_keyboard_shortcuts();
     void on_action_home_preferences();
+    void on_action_home_pomodoro();
     void on_action_summary();
     void on_action_character();
     void on_action_timeline();

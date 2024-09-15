@@ -7,7 +7,8 @@
 	"settings": {
 		"files.associations": {
 			"string": "cc",
-			"*.tcc": "cpp"
+			"*.tcc": "cpp",
+			"*.xpm": "cpp"
 		},
 		"makefile.launchConfigurations": [
 			{

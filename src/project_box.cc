@@ -2,6 +2,8 @@
 #include <utils.hh>
 #include <globals.hh>
 #include <target_box.hh>
+#include <pomodoro_box.hh>
+
 #include <gdkmm.h>
 
 // Resources
@@ -30,6 +32,7 @@ void ProjectBox::set_ui() {
 	auto styl_hbx = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
 	auto keyb_hbx = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
 	auto pref_hbx = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
+	auto pomo_hbx = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 0);
 
 	// Make labels
 	auto proj_lbl = Gtk::make_managed<Gtk::Label>("Project");
@@ -38,6 +41,7 @@ void ProjectBox::set_ui() {
 	auto styl_lbl = Gtk::make_managed<Gtk::Label>("Text Styles");
 	auto keyb_lbl = Gtk::make_managed<Gtk::Label>("Keyboard Shortcuts");
 	auto pref_lbl = Gtk::make_managed<Gtk::Label>("Preferences");
+	auto pomo_lbl = Gtk::make_managed<Gtk::Label>("Pomodoro");
 
 	proj_hbx->append(*proj_lbl);
 	auth_hbx->append(*auth_lbl);
@@ -45,6 +49,7 @@ void ProjectBox::set_ui() {
 	styl_hbx->append(*styl_lbl); 
 	keyb_hbx->append(*keyb_lbl);
 	pref_hbx->append(*pref_lbl);
+	pomo_hbx->append(*pomo_lbl);
 
 	// Make views for pages
 	auto proj_viw = this->set_project_ui();
@@ -53,6 +58,7 @@ void ProjectBox::set_ui() {
 	auto styl_viw = Gtk::make_managed<Gtk::Label>("Styles View");
 	auto keyb_viw = Gtk::make_managed<Gtk::Label>("Keyboard Shortcuts View");
 	auto pref_viw = Gtk::make_managed<Gtk::Label>("Preferences View");
+	auto pomo_viw = Gtk::make_managed<PomodoroBox>(nullptr);
 
 	// Add pages
 	this->m_nb.append_page(*proj_viw, *proj_hbx);
@@ -61,6 +67,7 @@ void ProjectBox::set_ui() {
 	this->m_nb.append_page(*styl_viw, *styl_hbx);
 	this->m_nb.append_page(*keyb_viw, *keyb_hbx);
 	this->m_nb.append_page(*pref_viw, *pref_hbx);
+	this->m_nb.append_page(*pomo_viw, *pomo_hbx);
 
     this->m_nb.set_expand(true);
 

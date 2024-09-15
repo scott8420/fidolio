@@ -28,5 +28,4 @@ void AuthorBox::set_ui() {
 	auto emai_lbl = Gtk::make_managed<Gtk::Label>("Author: ");
 	auto biog_lbl = Gtk::make_managed<Gtk::Label>("Bio: ");
 
-
 }

@@ -244,6 +244,7 @@ void MainWindow::set_action_group_explore() {
     this->m_action_group_explore->add_action("home_text_styles", sigc::mem_fun(*this, &MainWindow::on_action_home_text_styles));
     this->m_action_group_explore->add_action("home_keyboard_shortcuts", sigc::mem_fun(*this, &MainWindow::on_action_home_keyboard_shortcuts));
     this->m_action_group_explore->add_action("home_preferences", sigc::mem_fun(*this, &MainWindow::on_action_home_preferences));
+    this->m_action_group_explore->add_action("home_pomodoro", sigc::mem_fun(*this, &MainWindow::on_action_home_pomodoro));
     
     this->m_action_group_explore->add_action("home_summary", sigc::mem_fun(*this, &MainWindow::on_action_summary));
     this->m_action_group_explore->add_action("home_character", sigc::mem_fun(*this, &MainWindow::on_action_character));
@@ -265,6 +266,8 @@ void MainWindow::set_action_group_explore() {
         APP->set_accel_for_action("explore_actions.home_text_styles", "<Alt>4");
         APP->set_accel_for_action("explore_actions.home_keyboard_shortcuts", "<Alt>5");
         APP->set_accel_for_action("explore_actions.home_preferences", "<Alt>6");
+        APP->set_accel_for_action("explore_actions.home_pomodoro", "<Alt>7");
+        
         APP->set_accel_for_action("explore_actions.home_summary", "<Ctrl>2");
         APP->set_accel_for_action("explore_actions.home_character", "<Ctrl>3");
         APP->set_accel_for_action("explore_actions.home_world", "<Ctrl>4");
@@ -369,6 +372,11 @@ void MainWindow::on_action_home_keyboard_shortcuts() {
 void MainWindow::on_action_home_preferences() {
     this->m_nb.set_current_page(HOME);
     this->m_pb->set_page(HOME_PREFERENCES);
+}
+
+void MainWindow::on_action_home_pomodoro() {
+    this->m_nb.set_current_page(HOME);
+    this->m_pb->set_page(HOME_POMODORO);
 }
 
 void MainWindow::on_action_summary() {

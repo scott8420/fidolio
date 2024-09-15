@@ -17,7 +17,6 @@ public:
 	Gtk::Window* m_window = nullptr;
 	Glib::ustring& app_name();
 	Glib::ustring& app_version();
-
 	
 private:
 	Glib::ustring m_app_name = "Fidolio";

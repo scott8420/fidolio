@@ -15,6 +15,7 @@ fidolio_SOURCES = \
 	src/globals.cc \
 	src/main.cc \
 	src/mainwindow.cc \
+	src/pomodoro_box.cc \
 	src/project_box.cc \
 	src/target_box.cc \
 	src/target_progress_box.cc \
@@ -42,6 +43,7 @@ fidolio_SOURCES = \
 	include/open-menu.xpm \
 	include/outline.xpm \
 	include/people.xpm \
+	include/pomodoro_box.hh \
 	include/pomodoro.ui \
 	include/pomodoro.xpm \
 	include/project_box.hh \
