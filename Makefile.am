@@ -55,6 +55,7 @@ fidolio_SOURCES = \
 	include/target_box.hh \
 	include/target_progress_box.hh \
 	include/target_progress_count_menu.ui \
+	include/ticker.hh \
 	include/timeline.xpm \
 	include/trash.xpm \
 	include/utils.hh \
