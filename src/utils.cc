@@ -94,3 +94,9 @@ const Glib::ustring Utils::rgba_to_hex(const Gdk::RGBA& color) {
 
 	return Glib::ustring(ss.str().c_str());
 }
+
+bool Utils::dark_mode_on() {
+	auto settings = Gtk::Settings::get_default();
+	auto theme_name = settings->property_gtk_theme_name().get_value();
+    return theme_name.find("dark") != std::string::npos;
+}
