@@ -8,6 +8,8 @@
 #define DEGR(value)  value * (M_PI / 180.0f)
 #define ZERO DEGR(-90.0f)
 #define FONTSIZE 14
+#define MINS 60
+#define SECS 60
 
 PomodoroDrawingArea::PomodoroDrawingArea() 
 	: m_color(RED), m_round(1), m_phase("Focus"), 
@@ -121,22 +123,18 @@ void PomodoroDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr, int w
 	}
 
 	if (this->m_draw_time) {
-		double seconds = (double(this->m_ticker->get_counter()) / 
-							double(this->m_ticker->get_duration())) *
-							double(this->m_ticker->get_duration()) * 
-							((double(this->m_ticker->interval)) / 1000.0f);
-		int hours = int(seconds) / (60 * 60);
-		int mins = int(seconds) / 60;
-		double secs = seconds - double(hours * (60 * 60)) - double(mins * 60) + 1;
-		
+		double counter = double(this->m_ticker->get_counter());
+		double interval = double(this->m_ticker->interval);
+		double seconds = (counter / (1000.0f / interval)) + 1.0;
+		int hours = int(seconds) / (MINS * SECS);
+		int mins = int(seconds) / SECS;
+		double secs = seconds - double(hours * (MINS * SECS)) - double(mins * SECS);
 		auto dt = Glib::DateTime::create_local(2024,1,1,hours,mins,secs);
 		auto time = dt.format("%H:%M:%S");
 		cr->set_font_size(FONTSIZE);
 		
 		Cairo::TextExtents te;
-
 		cr->get_text_extents(time, te);
-
 		cr->move_to(x-(te.width/2), y+(te.height/2));
 		cr->show_text(time);
 	}

@@ -4,7 +4,7 @@ AUTOMAKE_OPTIONS = subdir-objects
 
 bin_PROGRAMS = fidolio
 
-fidolio_CPPFLAGS = @GTK4_CFLAGS@ -I../include/ -std=c++20
+fidolio_CPPFLAGS = @GTK4_CFLAGS@ -I../include/ -std=c++20 
 
 fidolio_LDADD = @GTK4_LIBS@
 
@@ -43,7 +43,9 @@ fidolio_SOURCES = \
 	include/open-menu_menu.ui \
 	include/open-menu.xpm \
 	include/outline.xpm \
+	include/pause.xpm \
 	include/people.xpm \
+	include/play.xpm \
 	include/pomodoro_box.hh \
 	include/pomodoro_drawingarea.hh \
 	include/pomodoro.ui \
@@ -51,6 +53,7 @@ fidolio_SOURCES = \
 	include/project_box.hh \
 	include/question.xpm \
 	include/reset.xpm \
+	include/stop.xpm \
 	include/summary.xpm \
 	include/target_box.hh \
 	include/target_progress_box.hh \

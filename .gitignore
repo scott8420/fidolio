@@ -49,5 +49,6 @@ build/Makefile
 build/src
 build/stamp-h1
 .dirstamp
+Makefile.am
 Makefile.am~
 configure~
