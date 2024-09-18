@@ -129,7 +129,7 @@ void PomodoroDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr, int w
 		int hours = int(seconds) / (MINS * SECS);
 		int mins = int(seconds) / SECS;
 		double secs = seconds - double(hours * (MINS * SECS)) - double(mins * SECS);
-		auto dt = Glib::DateTime::create_local(2024,1,1,hours,mins,secs);
+		auto dt = Glib::DateTime::create_local(2024, 1, 1, hours, mins, secs);
 		auto time = dt.format("%H:%M:%S");
 		cr->set_font_size(FONTSIZE);
 		
@@ -144,7 +144,7 @@ void PomodoroDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr, int w
 		Cairo::TextExtents te;
 		cr->get_text_extents(this->get_phase(), te);
 
-		cr->move_to(x-(te.width/2), y+(te.height*2));
+		cr->move_to(x-(te.width/2), y-te.height);
 		cr->show_text(this->get_phase());
 	}
 
@@ -154,7 +154,7 @@ void PomodoroDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr, int w
 		Cairo::TextExtents te;
 		cr->get_text_extents(rnd, te);
 
-		cr->move_to(x-(te.width/2)-2, y-te.height);
+		cr->move_to(x-(te.width/2)-2, y+(te.height*2));
 		cr->show_text(rnd);
 	}
 }

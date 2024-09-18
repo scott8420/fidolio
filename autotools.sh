@@ -53,17 +53,17 @@ function cleanbuild() {
 }
 
 function build() {
-	clean=false
+	clean=0
 
-	if [ $1 == "clean" ]; then
-		clean=true
+	if [ "$1" == "clean" ]; then
+		clean=1
 	fi
 
 	if [[ -d "./build" ]]; then
 		cd ./build
 
 		# CLEAN IF REQUESTED
-		if [ $clean -eq true ]; then
+		if [ $clean == 1 ]; then
 			make clean
 		fi
 		

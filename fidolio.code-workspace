@@ -86,7 +86,8 @@
 				"binaryArgs": []
 			}
 		],
-		"makefile.makefilePath": "/home/scott/Develop/gtk/fidolio/build/Makefile"
+		"makefile.makefilePath": "/home/scott/Develop/gtk/fidolio/build/Makefile",
+		"r.lsp.promptToInstall": false
 	}
 }
 
